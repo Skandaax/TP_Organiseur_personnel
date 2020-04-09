@@ -1,0 +1,27 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    background-color: beige;
+}
+
+table
+{
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#table2
+{
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.tab
+{
+    
+}
