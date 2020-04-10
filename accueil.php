@@ -1,7 +1,6 @@
-<?php
 
 
-?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,14 +29,19 @@
             <th><input type="text" id="ide" name="ide" placeholder="Votre identifiant"></th>
         </tr>
         <tr>
+            <th><label for="ide">Votre email</label></th>
+        </tr>
+        <tr>
+        <th><input type="text" id="mail" name="mail" placeholder="Votre email"></th>
+        </tr>
         <tr>
             <th><label for="passw">Votre mot de passe</label>
         </tr>
         <tr>    
-            <th><input type="text" id="passw" name="passw" placeholder="Votre e:mail"><th>
+            <th><input type="password" id="passw" name="passw" placeholder="Votre mot de passe"><th>
         </tr>
         <tr>
-            <th><input type="submit" value="Envoyer"></th> 
+            <th><input type="submit" value="S'inscrire"></th> 
         </form>    
         </tr>
     </thead>
@@ -60,10 +64,10 @@
             <th><label for="pass">Votre mot de passe</label>
         </tr>
         <tr>    
-            <th><input type="text" id="pass" name="pass" placeholder="Votre mot de passe"><th>
+            <th><input type="password" id="pass" name="pass" placeholder="Votre mot de passe"><th>
         </tr>
         <tr>
-            <th><input type="submit" value="Envoyer"></th> 
+            <th><input type="submit" value="Se connecter"></th> 
         </form>    
         </tr>
 </table>
