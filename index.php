@@ -12,6 +12,7 @@ $registration = array();
 $registration["utilisateur"] = "id";
 $registration["mail"] = "email";
 $registration["mot de passe"] = "mdp";
+$registration = file_get_contents("user.json");
 $json = fopen("user.json", "w");
 fwrite($json, json_encode($registration));
 fclose($json);
@@ -24,6 +25,7 @@ $file = fopen("home.php", "c");
 $file = fopen("models/utilisateur.php", "c");
 $file = fopen("login.php", "c");
 $file = fopen("function.php","c");
+$file = fopen("taches.php", "c");
 
 
 //Inclusions class//
@@ -60,7 +62,7 @@ function insertUser() {
     $utilisateur->setPseudo($_POST["id"]);
     $utilisateur->setMp($_POST["mdp"]);
     $utilisateur->save_user();
-    header('Location: index.php?router=home');
+    header('Location: index.php?route=home');
 }
 
 //--------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 //---------------------------------------Cookie-----------------------------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
-//---------------------------------------Cookie-----------------------------------
+//---------------------------------------Class------------------------------------
 class Users
     {
     protected $id;
@@ -52,15 +52,14 @@ class Users
     {
         return $this->mdp;
     }
-    
     function save_user() 
     {        
-        $user = file_get_contents("user.json");
-        $tab = json_decode($user);
+        $registration = file_get_contents("user.json");
+        $tab = json_decode($registration);
         array_push($tab,["id"=>sizeof($tab)+1, "pseudo"=> $this->id, "motdepasse"=> $this->Mdp]);
-        file_put_contents("user.json", json_encode($tableaux));
-        }
+        file_put_contents("user.json", json_encode($tab));
     }
+}
     
 
     
