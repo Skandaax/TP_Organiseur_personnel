@@ -3,8 +3,8 @@
 //Inclusions class//
 // Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 
-require "accueil.php";
-
+require "registration.php";
+require "login.php";
 require "models/utilisateur.php";
 
 
@@ -16,7 +16,10 @@ fclose($json);
 
 var_dump($json);
 
+$file = fopen("home.php", "c");
 $file = fopen("models/utilisateur.php", "c");
+$file = fopen("login.php", "c");
+$file = fopen("function.php","c");
 
 class Users
 {
@@ -69,22 +72,54 @@ class Users
 
     function  saveuser()
     {
-        echo "l'identifian est sauvegarder";
+        echo "l'identifiant est sauvegarder";
     }
 }
 
-$id = new User ("" , "");
-$id->user();
 
+
+//--------------------------------------------------------------------------------
 // 2.Rooter
-// Structure permetant d'appeler une action en fonction de la requ^te utilisteur
+// Structure permetant d'appeler une action en fonction de la requête utilisteur
+
+
+
+// Erreur Utilisateur
+if(empty($_POST)) 
+{
+    $errors = array();
+
+    if(empty($_POST['id'])) 
+    {
+        $errors['id'] = " Vous n'avez pas entrer l'identifiant";
+    }
+
+var_dump($errors);
+}
+ 
+
+// champ Identifiant
+
+
+// Champs mot de passe
+
+
+//--------------------------------------------------------------------------------
+// 3. Fonctionnalités d'affichage :
+// Actions déclenchées en fonction du choix de l'utilisateur
+// 1. choix = 1 fonction avc deux "types" de fonctions, celles qui mèneront à un affichage, et celles qui seront redirigés (vers un choix conduisant à un affichage)
+
+// Fonctionnalités d'affichage : 
 
 
 
 
-//3. Fonctionnalités d'affichage :
+//Fonctionnalité redirigées :
 
 
 
 
-//Foction redirigées :
+//--------------------------------------------------------------------------------
+//.TEMPLATE
+// Affichage du système de templates HTML
+
