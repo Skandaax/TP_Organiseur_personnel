@@ -9,9 +9,9 @@ require "models/utilisateur.php";
 
 
 $registration = array();
-$registration["id"] = "id";
-$registration["email"] = "email";
-$registration["mdp"] = "mdp";
+$registration["utilisateur"] = "id";
+$registration["mail"] = "email";
+$registration["mot de passe"] = "mdp";
 $json = fopen("user.json", "w");
 fwrite($json, json_encode($registration));
 fclose($json);
@@ -33,8 +33,8 @@ class Users
 
     function __construct(string $id, string $mdp, string $email)
     {
-        $this->setid($nom);
-        $this->setmdp($force);
+        $this->setid($id);
+        $this->setmdp($mdp);
         $this->setmail($email);
 
     }
@@ -80,63 +80,25 @@ class Users
     }
 }
 
-$id = new user;
-$id > insertUser();
+$utilisateur = new User;
+$utilisateur->insertUser();
 
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
 // Structure permetant d'appeler une action en fonction de la requête utilisteur
 
+$router = isset($_POST["router"])? $_POST["router"] : "home";
 
-$route = isset($_POST["route"])? $_POST["route"] : "home";
-
-switch($route) {
-    case "home" : $view = Home();
+switch($router) {
+    case "home" : header('locaton: home.php');
+    echo "Diriger vers la page d'accueil";
         break;
-    case "insert_user" : insertUser();
+    case "insert_user" : header('locaton: models/utilisateur.php');
+    echo "ajout d'un utilisateur";
         break;
-    default : Home();
-}
-
-// Erreur Utilisateur
-if(empty($_POST)) 
-{
-    $errors = array();
-
-    if(empty($_POST['id'])) 
-    {
-        $errors['id'] = " Vous n'avez pas entrer l'identifiant";
-    }
-
-var_dump($errors);
-}
- 
-// champ mail
-
-if(empty($_POST)) 
-{
-    $errors = array();
-
-    if(empty($_POST['email'])) 
-    {
-        $errors['email'] = " Vous n'avez pas entrer d'email";
-    }
-
-var_dump($errors);
-}
-
-// Champs mot de passe
-if(empty($_POST)) 
-{
-    $errors = array();
-
-    if(empty($_POST['mdp'])) 
-    {
-        $errors['mdp'] = " Vous n'avez pas entrer de mot de passe";
-    }
-
-var_dump($errors);
+    default : "home";
+    echo "Page d'accueil par defaut";
 }
 
 //--------------------------------------------------------------------------------
@@ -147,18 +109,29 @@ var_dump($errors);
 // Fonctionnalités d'affichage : 
 
 function Home() : string {
-    return "home.html";
+    return "home.php";
 }
-
 
 //Fonctionnalité redirigées :
 
-function insertUser() {
-header('locaton: models/utilisateur.php');
-}
 
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML
 
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma TODO-LIST</title>
+</head>
+<body>
+
+ <?php require "home.php" ?>
+
+</body>
+</html>
