@@ -13,7 +13,6 @@ $registration["utilisateur"] = "id";
 $registration["mail"] = "email";
 $registration["mot de passe"] = "mdp";
 $registration = file_get_contents("user.json");
-    echo $registration;
 $json = fopen("user.json", "w");
 fwrite($json, json_encode($registration));
 fclose($json);
