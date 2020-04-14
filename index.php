@@ -8,11 +8,15 @@ require "login.php";
 require "models/utilisateur.php";
 
 
-$registration = [];
-
+$registration = array();
+$registration["id"] = "id";
+$registration["email"] = "email";
+$registration["mdp"] = "mdp";
 $json = fopen("user.json", "w");
 fwrite($json, json_encode($registration));
 fclose($json);
+
+echo json_encode($registration);
 
 var_dump($json);
 
@@ -31,7 +35,7 @@ class Users
     {
         $this->setid($nom);
         $this->setmdp($force);
-        $this->setmail($mail);
+        $this->setmail($email);
 
     }
 
@@ -76,6 +80,8 @@ class Users
     }
 }
 
+$id = new user;
+$id > insertUser();
 
 
 //--------------------------------------------------------------------------------
@@ -83,6 +89,15 @@ class Users
 // Structure permetant d'appeler une action en fonction de la requête utilisteur
 
 
+$route = isset($_POST["route"])? $_POST["route"] : "home";
+
+switch($route) {
+    case "home" : $view = Home();
+        break;
+    case "insert_user" : insertUser();
+        break;
+    default : Home();
+}
 
 // Erreur Utilisateur
 if(empty($_POST)) 
@@ -97,12 +112,32 @@ if(empty($_POST))
 var_dump($errors);
 }
  
+// champ mail
 
-// champ Identifiant
+if(empty($_POST)) 
+{
+    $errors = array();
 
+    if(empty($_POST['email'])) 
+    {
+        $errors['email'] = " Vous n'avez pas entrer d'email";
+    }
+
+var_dump($errors);
+}
 
 // Champs mot de passe
+if(empty($_POST)) 
+{
+    $errors = array();
 
+    if(empty($_POST['mdp'])) 
+    {
+        $errors['mdp'] = " Vous n'avez pas entrer de mot de passe";
+    }
+
+var_dump($errors);
+}
 
 //--------------------------------------------------------------------------------
 // 3. Fonctionnalités d'affichage :
@@ -111,12 +146,16 @@ var_dump($errors);
 
 // Fonctionnalités d'affichage : 
 
-
+function Home() : string {
+    return "home.html";
+}
 
 
 //Fonctionnalité redirigées :
 
-
+function insertUser() {
+header('locaton: models/utilisateur.php');
+}
 
 
 //--------------------------------------------------------------------------------

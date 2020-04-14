@@ -22,24 +22,24 @@
             <th><label for="id">Votre identifiant</label></th>
         </tr>
         <tr>
-            <th><input type="text" id="id" name="id" placeholder="Votre identifiant"></th>
+            <th><input type="text" id="id" name="id" placeholder="Votre identifiant" required></th>
         </tr>
         <tr>
             <th><label for="mail">Votre email</label></th>
         </tr>
         <tr>
-        <th><input type="text" id="mail" name="mail" placeholder="Votre email"></th>
+        <th><input type="text" id="mail" name="mail" placeholder="Votre email" required></th>
         </tr>
         <tr>
             <th><label for="passw">Votre mot de passe</label>
         </tr>
         <tr>    
-            <th><input type="password" id="passw" name="passw" placeholder="Votre mot de passe"><th>
+            <th><input type="password" id="passw" name="passw" placeholder="Votre mot de passe" required><th>
         </tr>
         <th><label for="passw2">Votre mot de passe</label>
         </tr>
         <tr>    
-            <th><input type="password2" id="passw2" name="passw2" placeholder="Confirmer votre mot de passe"><th>
+            <th><input type="password" id="passw2" name="passw2" placeholder="Confirmer votre mot de passe"><th>
         </tr>
         <tr>
             <th><input type="submit" value="envoyer"></th> 
