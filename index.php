@@ -1,13 +1,13 @@
 <?php
 
-//Inclusions class//
-// Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
+//---------------------------------------Cookie-----------------------------------
+setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
+//--------------------------------------------------------------------------------
 require "registration.php";
 require "login.php";
-require "models/utilisateur.php";
-
-
+//--------------------------------------------------------------------------------
+// Création de fichiers
 $registration = array();
 $registration["utilisateur"] = "id";
 $registration["mail"] = "email";
@@ -25,72 +25,17 @@ $file = fopen("models/utilisateur.php", "c");
 $file = fopen("login.php", "c");
 $file = fopen("function.php","c");
 
-class Users
-{
-    protected $id;
-    protected $mdp;
-    protected $email;
 
-    function __construct(string $id, string $mdp, string $email)
-    {
-        $this->setid($id);
-        $this->setmdp($mdp);
-        $this->setmail($email);
-
-    }
-
-    function registration()  
-    {
-        echo $this->id ." ". $this->mdp." "."<br>";
-    }
-
-    function setuser()
-    {
-        $this->id = $POST["Identifiant"];
-    }
-
-    function getuser() : string 
-    {
-        return $this->id;
-    }
-
-    function setmail()
-    {
-        $this->mail = $POST["Email"];
-    }
-
-    function getmail() : string 
-    {
-        return $this->mail;
-    }
-
-    function setpassword()
-    {
-        $this->mdp = $POST["Password"];
-    }
-
-    function getpassword() : string 
-    {
-        return $this->mdp;
-    }
-
-    function  saveuser()
-    {
-        echo "l'identifiant est sauvegarder";
-    }
-}
-
-$utilisateur = new User;
-$utilisateur->insertUser();
-
+//Inclusions class//
+// 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
+require "models/utilisateur.php";
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
 // Structure permetant d'appeler une action en fonction de la requête utilisteur
+$route = isset($_POST["route"])? $_POST["route"] : "home";
 
-$router = isset($_POST["router"])? $_POST["router"] : "home";
-
-switch($router) {
+switch($route) {
     case "home" : $include = home();
         break;
     case "insert_user" : insert_user();
@@ -110,11 +55,6 @@ function Home() : string {
 }
 
 //Fonctionnalité redirigées :
-function registration() {
-    return "registration.php";
-}
-
-
 function insertUser() {
     $utilisateur = new Utilisateur("","");
     $utilisateur->setPseudo($_POST["id"]);
@@ -126,7 +66,6 @@ function insertUser() {
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML
-
 ?>
 
 <!DOCTYPE html>
