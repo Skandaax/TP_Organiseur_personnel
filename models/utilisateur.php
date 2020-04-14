@@ -49,8 +49,12 @@ class Utilisateur
         return $this->mdp;
     }
 
-    function  sauveruser()
-    {
-        $this->sauveruser;
+    function save_user() {
+        var_dump($this);
+        $user = file_get_contents("user.json");
+        $tab = json_decode($user);
+        array_push($tab,["id"=>sizeof($tab)+1, "pseudo"=> $this->id, "motdepasse"=> $this->mdp]);
+        file_put_contents("user.json", json_encode($tab));
     }
+
 }

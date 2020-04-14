@@ -91,14 +91,11 @@ $utilisateur->insertUser();
 $router = isset($_POST["router"])? $_POST["router"] : "home";
 
 switch($router) {
-    case "home" : header('locaton: home.php');
-    echo "Diriger vers la page d'accueil";
+    case "home" : $include = home();
         break;
-    case "insert_user" : header('locaton: models/utilisateur.php');
-    echo "ajout d'un utilisateur";
+    case "insert_user" : insert_user();
         break;
-    default : "home";
-    echo "Page d'accueil par defaut";
+    default : $nclude = Home();
 }
 
 //--------------------------------------------------------------------------------
@@ -113,8 +110,18 @@ function Home() : string {
 }
 
 //Fonctionnalité redirigées :
+function registration() {
+    return "registration.php";
+}
 
 
+function insertUser() {
+    $utilisateur = new Utilisateur("","");
+    $utilisateur->setPseudo($_POST["id"]);
+    $utilisateur->setMp($_POST["mdp"]);
+    $utilisateur->save_user();
+    header('Location: index.php?router=home');
+}
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE
@@ -131,7 +138,7 @@ function Home() : string {
 </head>
 <body>
 
- <?php require "home.php" ?>
+ <?php require $include ?>
 
 </body>
 </html>

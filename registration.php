@@ -16,7 +16,7 @@
         </tr>
         
         <tr>
-            <th><form action="#" method="POST"></th>
+            <th><form action="index.php?router=insert_user" method="POST"></th>
         </tr>
         <tr>
             <th><label for="id">Votre identifiant</label></th>
