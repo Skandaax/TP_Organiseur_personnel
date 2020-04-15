@@ -4,33 +4,18 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
 // Création de fichiers
-
-$registration = array();
-$registration["utilisateur"] = "id";
-$registration["mail"] = "email";
-$registration["mot de passe"] = "mdp";
-$registration = file_get_contents("user.json");
-
-$json = fopen("user.json", "w");
-fwrite($json, json_encode($registration));
+$json = fopen("data/user.json", "w");
 fclose($json);
 
-echo json_encode($registration);
-
-var_dump($json);
-
-$file = fopen("home.php", "c");
-$file = fopen("login.php", "c");
+$file = fopen("html/home.php", "c");
+$file = fopen("html/login.php", "c");
 $file = fopen("function.php","c");
 $file = fopen("taches.php", "c");
 
-
 //Inclusions class//
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
-require "models/utilisateur.php";
+require "models/user.php";
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
@@ -53,7 +38,7 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    return "home.php";
+    return "html/home.php";
 }
 
 //Fonctionnalité redirigées :

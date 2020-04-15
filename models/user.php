@@ -4,7 +4,7 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---------------------------------------Class------------------------------------
-class Users
+class User
     {
     protected $id;
     protected $mdp;
@@ -23,41 +23,58 @@ class Users
         echo $this->id ." ". $this->mdp." "."<br>";
     }
     
-    function setuser()
+    function setUser()
     {
-        $this->id = $POST["Identifiant"];
+        $this->nom = $POST["Identifiant"];
     }
     
-    function getuser() : string 
+    function getUser() : string 
     {
         return $this->id;
     }
     
-    function setmail()
+    function setMail()
     {
         $this->mail = $POST["Email"];
     }
     
-    function getmail() : string 
+    function getMail() : string 
     {
         return $this->mail;
     }
     
-    function setpassword()
+    function setpPssword()
     {
         $this->mdp = $POST["Password"];
     }
     
-    function getpassword() : string 
+    function getPassword() : string 
     {
         return $this->mdp;
     }
-    function save_user() 
+    function save_User() 
     {        
-        $registration = file_get_contents("user.json");
-        $tab = json_decode($registration);
-        array_push($tab,["id"=>sizeof($tab)+1, "id"=> $this->id, "mdp"=> $this->Mdp]);
-        file_put_contents("user.json", json_encode($tab));
+        $tab = json_decode(file_get_contents("data/user.json"));
+
+        $unique = true;
+        foreach($tab as $element) 
+        {
+            if($element->id == $this->id) {
+                $unique = false;
+            }
+        }
+
+        $registration = array();
+        $registration["utilisateur"] = sizeof($tab) + 1;
+        $registration["mail"] = $this->mail;
+        $registration["mot de passe"] = $this->mdp;
+
+        if($unique) {
+            array_push($tab, $registration);
+            $registration_json = json_encode($registration);
+            file_put_contents("data/user.json", $registration);
+        }
+        var_dump($registration_json);
     }
 }
     
