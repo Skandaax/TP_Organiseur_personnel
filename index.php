@@ -4,8 +4,7 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //--------------------------------------------------------------------------------
-require "registration.php";
-require "login.php";
+
 //--------------------------------------------------------------------------------
 // Création de fichiers
 $registration = array();
@@ -38,11 +37,11 @@ require "models/utilisateur.php";
 $route = isset($_POST["route"])? $_POST["route"] : "home";
 
 switch($route) {
-    case "home" : $include = home();
+    case "home" : $include = "registration.php";
         break;
     case "insert_user" : insert_user();
         break;
-    default : $nclude = Home();
+    default : $nclude = "registration.php";
 }
 
 //--------------------------------------------------------------------------------
@@ -58,7 +57,7 @@ function Home() : string {
 
 //Fonctionnalité redirigées :
 function insertUser() {
-    $utilisateur = new Utilisateur("","");
+    $utilisateur = new Users("","");
     $utilisateur->setPseudo($_POST["id"]);
     $utilisateur->setMp($_POST["mdp"]);
     $utilisateur->save_user();
