@@ -58,8 +58,8 @@ function Home() : string {
 //Fonctionnalité redirigées :
 function insertUser() {
     $utilisateur = new Users("","");
-    $utilisateur->setPseudo($_POST["id"]);
-    $utilisateur->setMp($_POST["mdp"]);
+    $utilisateur->setid($_POST["id"]);
+    $utilisateur->setMdp($_POST["mdp"]);
     $utilisateur->save_user();
     header('Location: index.php?route=home');
 }

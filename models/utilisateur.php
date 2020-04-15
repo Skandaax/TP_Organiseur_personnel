@@ -56,7 +56,7 @@ class Users
     {        
         $registration = file_get_contents("user.json");
         $tab = json_decode($registration);
-        array_push($tab,["id"=>sizeof($tab)+1, "pseudo"=> $this->id, "motdepasse"=> $this->Mdp]);
+        array_push($tab,["id"=>sizeof($tab)+1, "id"=> $this->id, "mdp"=> $this->Mdp]);
         file_put_contents("user.json", json_encode($tab));
     }
 }
