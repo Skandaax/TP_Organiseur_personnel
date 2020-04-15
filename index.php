@@ -37,11 +37,11 @@ require "models/utilisateur.php";
 $route = isset($_POST["route"])? $_POST["route"] : "home";
 
 switch($route) {
-    case "home" : $include = "registration.php";
+    case "home" : $include = showHome();
         break;
     case "insert_user" : insert_user();
         break;
-    default : $nclude = "registration.php";
+    default : $nclude = showHome();
 }
 
 //--------------------------------------------------------------------------------
@@ -51,16 +51,16 @@ switch($route) {
 
 // Fonctionnalités d'affichage : 
 
-function Home() : string {
+function showHome() : string {
     return "home.php";
 }
 
 //Fonctionnalité redirigées :
 function insertUser() {
-    $utilisateur = new Users("","");
-    $utilisateur->setid($_POST["id"]);
-    $utilisateur->setMdp($_POST["mdp"]);
-    $utilisateur->save_user();
+    $user = new Users("","");
+    $user->setid($_POST["id"]);
+    $user->setMdp($_POST["mdp"]);
+    $user->save_user();
     header('Location: index.php?route=home');
 }
 
