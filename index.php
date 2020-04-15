@@ -7,11 +7,13 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //--------------------------------------------------------------------------------
 // Création de fichiers
+
 $registration = array();
 $registration["utilisateur"] = "id";
 $registration["mail"] = "email";
 $registration["mot de passe"] = "mdp";
 $registration = file_get_contents("user.json");
+
 $json = fopen("user.json", "w");
 fwrite($json, json_encode($registration));
 fclose($json);
@@ -21,7 +23,6 @@ echo json_encode($registration);
 var_dump($json);
 
 $file = fopen("home.php", "c");
-$file = fopen("models/utilisateur.php", "c");
 $file = fopen("login.php", "c");
 $file = fopen("function.php","c");
 $file = fopen("taches.php", "c");
@@ -57,10 +58,12 @@ function showHome() : string {
 
 //Fonctionnalité redirigées :
 function insertUser() {
-    $user = new Users("","");
-    $user->setid($_POST["id"]);
-    $user->setMdp($_POST["mdp"]);
-    $user->save_user();
+    $utilisateur = new Users("","");
+    $utilisateur->setid($_POST["id"]);
+    $utilisateur->setMdp($_POST["mdp"]);
+
+    $utilisateur->save_user();
+
     header('Location: index.php?route=home');
 }
 
