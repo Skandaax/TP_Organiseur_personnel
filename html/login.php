@@ -16,7 +16,7 @@
         </tr>
         
         <tr>
-            <th><form action="#" method="POST"></th>
+            <th><form action="index.php?route=connect_user" method="POST"></th>
         </tr>
         <tr>
             <th><label for="id">Votre identifiants</label></th>
@@ -27,7 +27,7 @@
             <th><label for="pass">Votre mot de passe</label>
         </tr>
         <tr>    
-            <th><input type="password" id="pass" name="pass" placeholder="Votre mot de passe"><th>
+            <th><input type="password" id="mdp" name="mdp" placeholder="Votre mot de passe"><th>
         </tr>
         <tr>
             <th><input type="submit" value="Se connecter"></th> 

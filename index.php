@@ -1,7 +1,7 @@
 <?php
-
+session_start();
 //---------------------------------------Cookie-----------------------------------
-setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
+setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
 //--------------------------------------------------------------------------------
 // Création de fichiers
@@ -14,9 +14,13 @@ $file = fopen("html/login.php", "c");
 $file = fopen("function.php","c");
 $file = fopen("taches.php", "c");
 
+
+//--------------------------------------------------------------------------------
 //Inclusions class//
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
-require "models/user.php";
+require_once "models/utilisateur.php";
+
+require_once "taches.php";
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
@@ -27,6 +31,8 @@ switch($route) {
     case "home" : $include = showHome();
         break;
     case "insert_user" : insert_user();
+        break;
+    case "insert_user" : connect_user();
         break;
     default : $nclude = showHome();
 }
@@ -45,17 +51,21 @@ function showHome() : string {
 //Fonctionnalité redirigées :
 function insertUser() {
 
-    if(!empty($_POST["id"]) && !empty($_POST["mail"]) && !empty($_POST["mdp"] === $_POST["mdp2"])) 
-    {
-        $registration = new Users("","");
-        $registration->setId($_POST["id"]);
-        $registration->setMdp(password_hash($_POST["mdp"], PASSWORD_DEFAULT));
-        $registration->setEmail($_POST["email"]);
+    // Traitement d'un nouvelle utilisateur
 
-        $registration->save_user();
+    if(!empty($_POST["id_utilisateur"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+    {
+        $user = new Utilisateur("" , "");
+        $user->setId_utilisateur($_POST["utilisateur"]);
+        $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+        $user->setEmail($_POST["email"]);
+
+        $user->save_User();
     }
 
-    header('Location: index.php?route=home');
+    header('Location: index.php');
+
+    
 }
 
 //--------------------------------------------------------------------------------
@@ -72,7 +82,9 @@ function insertUser() {
 </head>
 <body>
 
- <?php require $include ?>
+        <!-- Inclusion sous templates -->
+
+    <?php require $include ?>
 
 </body>
 </html>
