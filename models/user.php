@@ -54,10 +54,9 @@ class User
     }
     function save_User() 
     {        
-        $tab = json_decode(file_get_contents("data/user.json"));
 
         $unique = true;
-        foreach($tab as $element) 
+        foreach($registration as $element) 
         {
             if($element->id == $this->id) {
                 $unique = false;
@@ -65,12 +64,17 @@ class User
         }
 
         $registration = array();
-        $registration["utilisateur"] = sizeof($tab) + 1;
-        $registration["mail"] = $this->mail;
-        $registration["mot de passe"] = $this->mdp;
+        $registration["utilisateur"] = "id" ;
+        $registration["mail"] = "email" ;
+        $registration["mot de passe"] = "mdp" ;
+        $registration = file_get_contents("data/user.json");
+
+        $tab = json_decode($registration);
+        array_push($tab,["id"=>sizeof($tab)+1, "email"=> $this->email, "mot de passe"=> $this->Mdp]);
+        file_put_contents("data/user.json", json_encode($tab));
 
         if($unique) {
-            array_push($tab, $registration);
+            array_push($registration);
             $registration_json = json_encode($registration);
             file_put_contents("data/user.json", $registration);
         }

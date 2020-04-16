@@ -5,6 +5,7 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //--------------------------------------------------------------------------------
 // Création de fichiers
+
 $json = fopen("data/user.json", "w");
 fclose($json);
 
@@ -43,11 +44,16 @@ function showHome() : string {
 
 //Fonctionnalité redirigées :
 function insertUser() {
-    $utilisateur = new Users("","");
-    $utilisateur->setid($_POST["id"]);
-    $utilisateur->setMdp($_POST["mdp"]);
 
-    $utilisateur->save_user();
+    if(!empty($_POST["id"]) && !empty($_POST["mail"]) && !empty($_POST["mdp"] === $_POST["mdp2"])) 
+    {
+        $registration = new Users("","");
+        $registration->setId($_POST["id"]);
+        $registration->setMdp($_POST["mdp"]);
+        $registration->setEmail($_POST["email"]);
+
+        $registration->save_user();
+    }
 
     header('Location: index.php?route=home');
 }
