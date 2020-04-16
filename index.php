@@ -20,7 +20,7 @@ $file = fopen("html/taches.php", "c");
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 require_once "models/utilisateur.php";
 
-require_once "taches.php";
+
 
 //--------------------------------------------------------------------------------
 // 2.Rooter

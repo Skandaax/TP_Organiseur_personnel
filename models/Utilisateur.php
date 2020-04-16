@@ -80,7 +80,7 @@ class Utilisateur
             file_put_contents("data/user.json", $user_json);
             var_dump($user_json);
         }
-
+    }
    //---------------------------------Connection Utilisateur------------------------------------
 function connect_user()
 {
