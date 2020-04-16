@@ -49,7 +49,7 @@ function insertUser() {
     {
         $registration = new Users("","");
         $registration->setId($_POST["id"]);
-        $registration->setMdp($_POST["mdp"]);
+        $registration->setMdp(password_hash($_POST["mdp"], PASSWORD_DEFAULT));
         $registration->setEmail($_POST["email"]);
 
         $registration->save_user();
