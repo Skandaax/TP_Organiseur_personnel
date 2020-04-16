@@ -23,27 +23,27 @@ class Utilisateur
         echo $this->id_utilisateur ." ". $this->password." ". $this->email." "."<br>";
     }
     
-    function setUser()
+    function setId_utilisateur()
     {
         $this->id_utilisateur = $POST["Utilisateur"];
     }
     
-    function getUser() : string 
+    function getId_utilisateur() : string 
     {
         return $this->id_utilisateur;
     }
     
-    function seteMail()
+    function setEmail()
     {
         $this->email = $POST["email"];
     }
     
-    function getMail() : string 
+    function getEmail() : string 
     {
         return $this->email;
     }
     
-    function setpPassword()
+    function setPassword()
     {
         $this->password = $POST["Password"];
     }
@@ -82,4 +82,22 @@ class Utilisateur
         }
 
    //---------------------------------Connection Utilisateur------------------------------------
-} 
+function connect_user()
+{
+       $id_valide ="id";
+       $mdp_valide ="mdp";
+
+    if (isset($_POST["id"]) && isset($_POST["mdp"])) 
+    {
+
+    $session["id"] = $_POST["id"];
+    $session["mdp"] = $_POST["mdp"];
+
+    echo "session connecté";
+   
+    header("location: ../taches.php");
+    }else{
+   echo "id incorrect";
+    }
+   }
+}

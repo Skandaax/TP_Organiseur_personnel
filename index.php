@@ -12,7 +12,7 @@ fclose($json);
 $file = fopen("html/home.php", "c");
 $file = fopen("html/login.php", "c");
 $file = fopen("function.php","c");
-$file = fopen("taches.php", "c");
+$file = fopen("html/taches.php", "c");
 
 
 //--------------------------------------------------------------------------------
@@ -47,6 +47,15 @@ switch($route) {
 function showHome() : string {
     return "html/home.php";
 }
+
+function insert_User() : string {
+    return "html/taches.php";
+}
+
+function connect_User() : string {
+    return "html/taches.php";
+}
+
 
 //Fonctionnalité redirigées :
 function insertUser() {
