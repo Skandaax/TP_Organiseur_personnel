@@ -1,5 +1,7 @@
 <?php
 session_start();
+var_dump($_SESSION);
+
 //---------------------------------------Cookie-----------------------------------
 setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
@@ -10,8 +12,6 @@ $json = fopen("data/user.json", "w");
 fclose($json);
 
 $file = fopen("html/home.php", "c");
-$file = fopen("html/login.php", "c");
-$file = fopen("function.php","c");
 $file = fopen("html/taches.php", "c");
 $file =fopen("html/membre.php", "c");
 
@@ -21,20 +21,22 @@ $file =fopen("html/membre.php", "c");
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 require_once "models/utilisateur.php";
 
-
-
 //--------------------------------------------------------------------------------
 // 2.Rooter
 // Structure permetant d'appeler une action en fonction de la requête utilisteur
-$route = isset($_POST["route"])? $_POST["route"] : "home";
+$route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
 switch($route) {
     case "home" : $include = showHome();
         break;
-    case "insert_user" : insert_user();
+    case "membre" : showMembre();
         break;
-    case "insert_user" : connect_user();
+    case "insert_user" : insertUser();
         break;
+    case "connect_user" : connectUser();
+        break;
+    case "deconnect" : deconnectUser();
+    break;
     default : $nclude = showHome();
 }
 
@@ -46,52 +48,57 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    return "html/home.php";
+    if(isset($_SESSION["utilisateur"])){
+        header("location:index.php?route=membre");
+    }
+    return "home.php";
 }
 
-function insert_User() : string {
-    return "html/taches.php";
+function showMembre() {
+    return "membre.php";
 }
-
-function connect_User() : string {
-    return "html/taches.php";
-}
-
 
 //Fonctionnalité redirigées :
 function insertUser() {
 
     // Traitement d'un nouvelle utilisateur
 
-    if(!empty($_POST["id_utilisateur"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+    if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
     {
-        $user = new Utilisateur("" , "");
-        $user->setId_utilisateur($_POST["utilisateur"]);
+        $user = new Utilisateur();
+        $user->setPseudo($_POST["pseudo"]);
         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+        $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
         $user->setEmail($_POST["email"]);
 
         $user->save_User();
     }
 
-    header('Location: index.php');
-
-    
+    header('Location:index.php');
 }
 
     // Connection d'un utilisateur
-function connectUser() {
-    $user = new Utilisateur("" , "");
-    $user->setId_utilisateur($_POST["utilisateur"]);
-    $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
-    $user->setEmail($_POST["email"]);
+    function connectUser() {
+    
+    if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
+        $user = new Utilisateur();
+        $user->setUtilisateur($_POST["utilisateur"]);
+        $new = $user->verifyUser()?? false;
+        
+        if($new) {
+            if(password_verify($_POST["password"], $new->password)) {
+                $_SESSION["pseudo"] = $new;
+            }
+        }
+    }
 
-    $user->connect_User();
+     header('Location:index.php');
 }
 
-
-
-
-
+function deconnectUser() {
+    unset($_SESSION["pseudo"]);
+    header('Location:index.php');
+}
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE
@@ -109,7 +116,7 @@ function connectUser() {
 
         <!-- Inclusion sous templates -->
 
-    <?php require $include ?>
+    <?php require "html/$include" ?>
 
 </body>
 </html>

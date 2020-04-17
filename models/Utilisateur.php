@@ -6,36 +6,35 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 //---------------------------------------Utilisateur------------------------------------
 class Utilisateur
     {
-    protected $id_utilisateur;
+    protected $idutilisateur;
+    protected $pseudo;
     protected $email;
     protected $password;
     
-    function __construct(string $id_utilisateur, string $password, string $email)
+
+    function setIdUtilisateur(int $id) 
     {
-        $this->setPseudo($id_utilisateur);
-        $this->setPassword($password);
-        $this->setEmail($email);
-    
+        $this->idutilisateur = $id;
     }
     
-    function registration()  
+    function getIdUtilisateur() : int 
     {
-        echo $this->id_utilisateur ." ". $this->password." ". $this->email." "."<br>";
+        return $this->idutilisateur;
     }
     
-    function setId_utilisateur()
+    function setPseudo(string $Pseudo)
     {
-        $this->id_utilisateur = $POST["Utilisateur"];
+        $this->setPseudo = $pseudo;
     }
     
-    function getId_utilisateur() : string 
+    function getpseudo() : string 
     {
-        return $this->id_utilisateur;
+        return $this->setPseudo;
     }
-    
-    function setEmail()
+
+    function setEmail(string $email)
     {
-        $this->email = $POST["email"];
+        $this->email = $email;
     }
     
     function getEmail() : string 
@@ -43,9 +42,9 @@ class Utilisateur
         return $this->email;
     }
     
-    function setPassword()
+    function setPassword(string $password)
     {
-        $this->password = $POST["Password"];
+        $this->password = $password;
     }
     
     function getPassword() : string 
@@ -60,49 +59,38 @@ class Utilisateur
         $tab = json_decode(file_get_contents("data/user.json"));
 
         $unique = true;
-        foreach($tab as $element)
-        {
-            if($element->id_utilisateur == $this->id_utilisateur){
+        foreach($tab as $element) {
+            if($element->pseudo == $this->pseudo){
                 $unique = false;
             }
         }
 
         $user = [
             "id_utilisateur" => sizeof($tab) + 1,
+            "pseudo" => $this->pseudo,
             "password" => $this->password,
+            "password2" => $this->password,
             "email" => $this->email
         ];
 
-        if($unique)
-        {
+        if($unique) {
             array_push($tab, $user);        
             $user_json = json_encode($tab);
             file_put_contents("data/user.json", $user_json);
             var_dump($user_json);
         }
     }
-   //---------------------------------Connection Utilisateur------------------------------------
-function connect_user()
-{
-       $id_valide ="utilisateur";
-       $mdp_valide ="password";
-
-    if (isset($_POST["utilisateur"]) && isset($_POST["password"])) 
-    {
-
-    $session["utilisateur"] = $_POST["utilisateur"];
-    $session["password"] = $_POST["password"];
-
-    echo "session connecté";
-   
-    header("location: ../taches.php");
-    }else{
-   echo "id incorrect";
-    }
-   }
-}
 
     // Veriffier l'existence de l'utilisateur dans le fichier json----------------------------------
-function verify_user() {
-    
+    function verifyUser() {
+        $tab = json_decode(file_get_contents("data/user.json"));
+
+        foreach($tab as $user) {
+            if($this->utilisateur == $user->utilisateur) {
+            return $user;
+            }else {
+                header('Location: index.php?route=connect');
+            }
+        }
+    }
 }
