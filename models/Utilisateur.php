@@ -73,6 +73,8 @@ class Utilisateur
             "email" => $this->email
         ];
 
+        echo json_encode($tab);
+
         if($unique) {
             array_push($tab, $user);        
             $user_json = json_encode($tab);

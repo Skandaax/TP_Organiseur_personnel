@@ -13,7 +13,8 @@ fclose($json);
 
 $file = fopen("html/home.php", "c");
 $file = fopen("html/taches.php", "c");
-$file =fopen("html/membre.php", "c");
+$file = fopen("html/membre.php", "c");
+$file = fopen("html/login.php", "c+");
 
 
 //--------------------------------------------------------------------------------
@@ -29,14 +30,16 @@ $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 switch($route) {
     case "home" : $include = showHome();
         break;
-    case "membre" : showMembre();
+    case "membre" : $include = showMembre();
         break;
     case "insert_user" : insertUser();
         break;
     case "connect_user" : connectUser();
         break;
     case "deconnect" : deconnectUser();
-    break;
+        break;
+    case "login" : $include = showLogin();
+        break;
     default : $nclude = showHome();
 }
 
@@ -48,7 +51,7 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    if(isset($_SESSION["utilisateur"])){
+    if(isset($_SESSION["pseudo"])){
         header("location:index.php?route=membre");
     }
     return "home.php";
@@ -56,6 +59,10 @@ function showHome() : string {
 
 function showMembre() {
     return "membre.php";
+}
+
+function showLogin() {
+    return "login.php";
 }
 
 //Fonctionnalité redirigées :
@@ -110,6 +117,7 @@ function deconnectUser() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Ma TODO-LIST</title>
 </head>
 <body>

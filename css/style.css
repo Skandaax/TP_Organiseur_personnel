@@ -2,14 +2,67 @@
 {
     margin: 0;
     padding: 0;
+    background-image: url("../img/earth-1151659_1920.jpg");
 }
 
-#centre
+#center
 {
-float: left;
 text-align: center;
 margin: auto;
-width: 50%;
+color: white;
+background-image: none;
 }
 
+.center {
+    text-align: center;
+    width: 100px;
+    margin: auto;
+    margin-top: 100px;
+    color: white;
+    background-image: none;
+}
 
+button {
+    background-image: none;
+}
+
+input{
+    width: 200px;
+    height: 30px;
+    background-image: none;
+}
+
+.center_div {
+    margin: 0 auto;
+    text-align: center;
+    width: 200px;
+    background-image: none;
+    
+}
+
+.log a{
+    margin-top: 30px;
+    width: 200px;
+    background-image: none;
+    color: white;
+}
+
+#espace_1 {
+    margin-top: 50px;
+}
+
+#espace_2 {
+    margin-top: 10px;
+}
+
+#espace_3 {
+    margin-top: 10px;
+}
+
+#espace_4 {
+    margin-top: 10px;
+}
+
+#espace_5 {
+    margin-top: 10px;
+}
