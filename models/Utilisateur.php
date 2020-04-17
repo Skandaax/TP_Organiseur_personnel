@@ -84,14 +84,14 @@ class Utilisateur
    //---------------------------------Connection Utilisateur------------------------------------
 function connect_user()
 {
-       $id_valide ="id";
-       $mdp_valide ="mdp";
+       $id_valide ="utilisateur";
+       $mdp_valide ="password";
 
-    if (isset($_POST["id"]) && isset($_POST["mdp"])) 
+    if (isset($_POST["utilisateur"]) && isset($_POST["password"])) 
     {
 
-    $session["id"] = $_POST["id"];
-    $session["mdp"] = $_POST["mdp"];
+    $session["utilisateur"] = $_POST["utilisateur"];
+    $session["password"] = $_POST["password"];
 
     echo "session connecté";
    
@@ -100,4 +100,9 @@ function connect_user()
    echo "id incorrect";
     }
    }
+}
+
+    // Veriffier l'existence de l'utilisateur dans le fichier json----------------------------------
+function verify_user() {
+    
 }

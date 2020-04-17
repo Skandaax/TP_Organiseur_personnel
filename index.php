@@ -13,6 +13,7 @@ $file = fopen("html/home.php", "c");
 $file = fopen("html/login.php", "c");
 $file = fopen("function.php","c");
 $file = fopen("html/taches.php", "c");
+$file =fopen("html/membre.php", "c");
 
 
 //--------------------------------------------------------------------------------
@@ -76,6 +77,21 @@ function insertUser() {
 
     
 }
+
+    // Connection d'un utilisateur
+function connectUser() {
+    $user = new Utilisateur("" , "");
+    $user->setId_utilisateur($_POST["utilisateur"]);
+    $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+    $user->setEmail($_POST["email"]);
+
+    $user->connect_User();
+}
+
+
+
+
+
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE
