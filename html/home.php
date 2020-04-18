@@ -11,10 +11,12 @@
 <div id="center">
     <h1>Ma Todolist</h1>
 </div>
-<div class="center">  
-    <h2> Inscription </h2>
-</div>
-<div class="center_div">
+
+<div class="center_div troisd">
+    <div class="center">  
+        <h2> Inscription </h2>
+    </div>
+&nbsp;
     <form action="index.php?route=insert_user" method="POST">
         <div id="espace_1">
             <input type="text" id="utilisateur" name="utilisateur" placeholder="Votre identifiant"  required>

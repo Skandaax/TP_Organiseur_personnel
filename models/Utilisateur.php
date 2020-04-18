@@ -11,6 +11,14 @@ class Utilisateur
     protected $email;
     protected $password;
     
+    function __construct(string $idutilisateur, string $pseudo, string $password, string $email)
+    {
+        $this->setIdUtilisateur($id_utilisateur);
+        $this->setPseudo($pseudo);
+        $this->setPassword($password);
+        $this->setEmail($email);
+    
+    }
 
     function setIdUtilisateur(int $id) 
     {

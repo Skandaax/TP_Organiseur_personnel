@@ -2,6 +2,9 @@
 {
     margin: 0;
     padding: 0;
+}
+
+body{
     background-image: url("../img/earth-1151659_1920.jpg");
 }
 
@@ -22,16 +25,6 @@ background-image: none;
     background-image: none;
 }
 
-button {
-    background-image: none;
-}
-
-input{
-    width: 200px;
-    height: 30px;
-    background-image: none;
-}
-
 .center_div {
     margin: 0 auto;
     text-align: center;
@@ -47,8 +40,15 @@ input{
     color: white;
 }
 
+/* Espacement des champs du formulaire et bouton - perspective 3d de la div */
+input{
+    width: 200px;
+    height: 30px;
+    background-image: none;
+}
+
 #espace_1 {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #espace_2 {
@@ -65,4 +65,19 @@ input{
 
 #espace_5 {
     margin-top: 10px;
+}
+
+button {
+    background-image: none;
+}
+
+.troisd{
+   
+    transform: scale3d();
+    background-color: grey;
+    width: 300px;
+    height: 330px;
+    position: relative;
+    border: 2 solid black;
+
 }

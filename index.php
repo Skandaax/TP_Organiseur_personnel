@@ -89,7 +89,7 @@ function insertUser() {
     
     if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
         $user = new Utilisateur();
-        $user->setUtilisateur($_POST["utilisateur"]);
+        $user->setUtilisateur($_POST["idutilisateur"]);
         $new = $user->verifyUser()?? false;
         
         if($new) {
@@ -106,6 +106,7 @@ function deconnectUser() {
     unset($_SESSION["pseudo"]);
     header('Location:index.php');
 }
+
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE
