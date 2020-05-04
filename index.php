@@ -42,6 +42,8 @@ switch($route) {
         break;
     case "login" : $include = showLogin();
         break;
+        case "taches" : insert_taches();
+    break;
     default : $nclude = showHome();
 }
 
@@ -65,6 +67,10 @@ function showMembre() {
 
 function showLogin() {
     return "login.php";
+}
+
+function insert_taches() {
+    return "taches.php";
 }
 
 //Fonctionnalité redirigées :
