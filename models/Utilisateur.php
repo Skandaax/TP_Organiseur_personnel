@@ -11,14 +11,11 @@ class Utilisateur
     protected $email;
     protected $password;
     
-    function __construct(string $idutilisateur, string $pseudo, string $password, string $email)
-    {
-        $this->setIdUtilisateur($id_utilisateur);
-        $this->setPseudo($pseudo);
-        $this->setPassword($password);
-        $this->setEmail($email);
-    
+    function __construct() {
+        $this->pdo = new PDO(<DATABASE>, <Login>, <PASSWORD>);
+        $this->idutilisateur = $id
     }
+
 
     function setIdUtilisateur(int $id) 
     {

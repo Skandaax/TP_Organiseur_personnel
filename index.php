@@ -22,6 +22,8 @@ $file = fopen("html/login.php", "c+");
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 require_once "models/utilisateur.php";
 
+require "global.php";
+
 //--------------------------------------------------------------------------------
 // 2.Rooter
 // Structure permetant d'appeler une action en fonction de la requête utilisteur
