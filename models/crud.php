@@ -17,40 +17,12 @@ class taches() {
     }
 }
 
-//---------------------------------------Modèle Crud------------------------------------
-class DbConnect {
-
-    protected $pdo;
-    protected $id;
-    protected $password;
-
-    function __construct($id = null) {
-        $this->pdo = new pdo(DATABASE, LOGIN, PASSWORD);
-        $this->idutilisateur = $id;
-        $this->password = $password;
-    }
-
-    function setID($id) {
-        $this->idutilisateur = $id;
-    }
-
-    function setPassword($password) {
-        $this->password = $password;
-    }
-}
-
-class utilisateur extends Dbconnect {
-    function __construct($id = null) {
-        parrent::__construct($id)
-    }
-}
-
 //---------------------------------------Interface Crud------------------------------------
 interface Crud {
 
     //---------------------------------------Select all------------------------------------
     function selectAll(){
-        $query = "SELECT * FROM taches;"
+        $query = "SELECT * FROM utilisateur;"
         $result = $this->pdo->prepare($query);
         $result->execute();
 
@@ -58,7 +30,7 @@ interface Crud {
 
         foreach($datas as $data) {
             $current  new taches();
-            $current->setID($data['id_taches'];
+            $current->setID($data['id_utilisateur'];
             
             array_push($tab, $current));
         }
@@ -67,7 +39,7 @@ interface Crud {
 
     //---------------------------------------Select------------------------------------
     function select() {
-        $querry ="SELECT * FROM taches WHERE id_taches = $this->id;";
+        $querry ="SELECT * FROM utilisateur WHERE id_utilisateur = $this->id;";
         $result = $this->pdo->prepare($query);
         $result->execute();
         $data = $result->fetch();
@@ -84,6 +56,11 @@ interface Crud {
 
         $this->id = $this->pdo->lastInsertID();
         return $this
+    }
+
+    //---------------------------------------Update------------------------------------
+    function update() {
+
     }
 
     //---------------------------------------delete------------------------------------*

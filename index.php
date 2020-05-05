@@ -22,7 +22,7 @@ $file = fopen("html/login.php", "c+");
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 require_once "models/utilisateur.php";
 
-require "global.php";
+require "conf/global.php";
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
@@ -43,7 +43,7 @@ switch($route) {
     case "login" : $include = showLogin();
         break;
         case "taches" : insert_taches();
-    break;
+        break;
     default : $nclude = showHome();
 }
 
@@ -62,6 +62,8 @@ function showHome() : string {
 }
 
 function showMembre() {
+    $user = new utilisateur();
+    $user->selectall();
     return "membre.php";
 }
 

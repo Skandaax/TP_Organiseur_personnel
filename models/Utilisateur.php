@@ -4,58 +4,44 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---------------------------------------Utilisateur------------------------------------
-class Utilisateur
-    {
+class Utilisateur {
     protected $idutilisateur;
     protected $pseudo;
     protected $email;
     protected $password;
-    
-    function __construct() {
-        $this->pdo = new PDO(<DATABASE>, <Login>, <PASSWORD>);
-        $this->idutilisateur = $id
-    }
 
-
-    function setIdUtilisateur(int $id) 
-    {
+    function setIdUtilisateur(int $id) {
         $this->idutilisateur = $id;
     }
     
-    function getIdUtilisateur() : int 
-    {
+    function getIdUtilisateur() : int {
         return $this->idutilisateur;
     }
     
-    function setPseudo(string $Pseudo)
-    {
+    function setPseudo(string $Pseudo){
         $this->setPseudo = $pseudo;
     }
     
-    function getpseudo() : string 
-    {
+    function getpseudo() : string {
         return $this->setPseudo;
     }
 
-    function setEmail(string $email)
-    {
+    function setEmail(string $email) {
         $this->email = $email;
     }
     
-    function getEmail() : string 
-    {
+    function getEmail() : string {
         return $this->email;
     }
     
-    function setPassword(string $password)
-    {
+    function setPassword(string $password) {
         $this->password = $password;
     }
     
-    function getPassword() : string 
-    {
+    function getPassword() : string {
         return $this->password;
     }
+
 
  //---------------------------------Sauvegarde de l'utilisateur------------------------------------
     function save_User() 
@@ -99,5 +85,11 @@ class Utilisateur
                 header('Location: index.php?route=connect');
             }
         }
+    }
+}
+
+class utilisateur extends Dbconnect {
+    function __construct($id = null) {
+        parrent::__construct($id);
     }
 }
