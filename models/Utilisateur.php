@@ -6,7 +6,7 @@ require "dbconnect.php";
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---------------------------------------Utilisateur------------------------------------
-class Utilisateur {
+abstract class Utilisateur {
     protected $idutilisateur;
     protected $pseudo;
     protected $email;
@@ -91,7 +91,7 @@ class Utilisateur {
 }
 
 //---------------------------------------Extension de la base de donnée dbconnect-----------------------------------
-abstract class user extends dbconnect {
+class user extends dbconnect {
     function __construct($id = null) {
         parrent::__construct($id);
     }
