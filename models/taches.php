@@ -32,8 +32,8 @@ class taches extends dbconnect {
 
         //$tab = [];
 
-        //$current = new utilisateur();
-        //$current->setId($data['id_utilisateur'];
+        //$current = new taches();
+        //$current->setId($data['id_taches'];
             
             //array_push($tab, $current));
         //}
@@ -52,7 +52,7 @@ class taches extends dbconnect {
 
     //---------------------------------------Insert------------------------------------
     function insert() {
-        $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) VALUES ('$this->id_utilisateur','$this->identifiant','$this->email','$this->password')";
+        $query = "INSERT INTO taches(id_tache,description,deadline,id_utilisateur) VALUES ('$this->id_tache','$this->description','$this->deadline','$this->id_utlisateur')";
 
         $result = $this->pdo->prepare($query);
         $result->execute();

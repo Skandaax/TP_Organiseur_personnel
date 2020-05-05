@@ -91,7 +91,7 @@ abstract class Utilisateur {
 }
 
 //---------------------------------------Extension de la base de donnée dbconnect-----------------------------------
-class user extends dbconnect {
+abstract class user extends dbconnect {
     function __construct($id = null) {
         parrent::__construct($id);
     }
@@ -135,11 +135,7 @@ class user extends dbconnect {
     }
 
     //---------------------------------------Update------------------------------------
-    //$servername = "localhost";
-    //$identifiant = "root";
-    //$password = "";
-    //$dbname = "todolist"
-    //}
+
 
     //---------------------------------------delete------------------------------------
     function delete() {
