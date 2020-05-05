@@ -88,8 +88,74 @@ class Utilisateur {
     }
 }
 
+//---------------------------------------Extension de la base de donnée dbconnect-----------------------------------
 class utilisateur extends Dbconnect {
     function __construct($id = null) {
         parrent::__construct($id);
     }
+
+    //---------------------------------------Select all------------------------------------
+    function selectAll(){
+        $query = "SELECT * FROM utilisateur;";
+        $result = $this->pdo->prepare($query);
+        $result->execute();
+
+        $tab = [];
+
+        foreach($datas as $data) {
+            $current  new id();
+            $current->setID($data['id_utilisateur'];
+            
+            array_push($tab, $current));
+        }
+        return $tab
+    }
+
+    //---------------------------------------Select------------------------------------
+    function select() {
+        $querry ="SELECT * FROM utilisateur WHERE id_utilisateur = $this->id;";
+        $result = $this->pdo->prepare($query);
+        $result->execute();
+        $data = $result->fetch();
+
+        return $this;
+    }
+
+    //---------------------------------------Insert------------------------------------
+    function insert() {
+        $query = "INSERT INTO utilisateur(nouvelle_taches,contact,id_utilisateur) VALUES ('$this->nouvelle_taches','$this->contact','$thisid_utilisateur')";
+
+        $result = $this->pdo->prepare($query);
+        $result->execute();
+
+        $this->id = $this->pdo->lastInsertID();
+        return $this
+    }
+
+    //---------------------------------------Update------------------------------------
+    function update() {
+
+
+    }
+
+    //---------------------------------------delete------------------------------------*
+    $servername = "localhost";
+    $identifiant = "root";
+    $password = "";
+    $dbname = "todolist"
+
+    $connection = mysql_connect($servername, $identifiant, $password, $dbname);
+
+    if (!$connection) {
+        die("Erreur de connection" .mysql_connect_error());
+        $sql = "DELETE FROM taches WHERE id=";
+        $connection->exec($sql);
+        echo "Suprimer avec succés";
+    }
+    catch(PDOExeption $e) {
+        echo $sql . "<br>". $e->getmessage();
+    }
+
+    $connection = null;
+
 }

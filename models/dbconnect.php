@@ -14,12 +14,4 @@ abstract class DbConnect implements crud {
     function getID(): ?int {
        return $this->id->$id;
     }
-
-    abstract function insert();
-    abstract function update();
-    abstract function delete();
-    abstract function selectAll();
-    abstract function select();
-
-
 }
