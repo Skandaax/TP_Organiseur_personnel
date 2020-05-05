@@ -1,5 +1,7 @@
 <?php
 
+require "dbconnect.php";
+
 //---------------------------------------Cookie-----------------------------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
@@ -89,7 +91,7 @@ class Utilisateur {
 }
 
 //---------------------------------------Extension de la base de donnée dbconnect-----------------------------------
-class utilisateur extends Dbconnect {
+abstract class user extends dbconnect {
     function __construct($id = null) {
         parrent::__construct($id);
     }
@@ -99,16 +101,16 @@ class utilisateur extends Dbconnect {
         $query = "SELECT * FROM utilisateur;";
         $result = $this->pdo->prepare($query);
         $result->execute();
+        $datas = $result->fetchall();
 
-        $tab = [];
+        //$tab = [];
 
-        foreach($datas as $data) {
-            $current  new id();
-            $current->setID($data['id_utilisateur'];
+        //$current = new utilisateur();
+        //$current->setId($data['id_utilisateur'];
             
-            array_push($tab, $current));
-        }
-        return $tab
+            //array_push($tab, $current));
+        //}
+        //return $tab
     }
 
     //---------------------------------------Select------------------------------------
@@ -123,39 +125,46 @@ class utilisateur extends Dbconnect {
 
     //---------------------------------------Insert------------------------------------
     function insert() {
-        $query = "INSERT INTO utilisateur(nouvelle_taches,contact,id_utilisateur) VALUES ('$this->nouvelle_taches','$this->contact','$thisid_utilisateur')";
+        $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) VALUES ('$this->id_utilisateur','$this->identifiant','$this->email','$this->password')";
 
         $result = $this->pdo->prepare($query);
         $result->execute();
 
         $this->id = $this->pdo->lastInsertID();
-        return $this
+        return $this;
     }
 
     //---------------------------------------Update------------------------------------
-    function update() {
+    //$servername = "localhost";
+    //$identifiant = "root";
+    //$password = "";
+    //$dbname = "todolist"
+    //}
 
+    //---------------------------------------delete------------------------------------
+    function delete() {
+        $servername = "localhost";
+        $identifiant = "root";
+        $password = "";
+        $dbname = "todolist";
 
+        //Création d'une connection-----------------------------------------------------
+        $connection = mysqli($servername, $identifiant, $password, $dbname);
+
+        //Vérification de la connection-------------------------------------------------
+        if (!$connection) {
+            die("Erreur de connection" .mysql_connect_error());
+
+        //Suppression d'un enregistrent-------------------------------------------------
+        $sql = "DELETE FROM utilisateur WHERE id=1";
+        }
+        if ($connection->query($sql) === TRUE) {
+            echo "Enregistrement supprimer avec succés";
+        } else {
+            echo "Erreur lors de la suppression de l'enregistrement: " . $connection->error;
+        }
+        
+        $connection->close();
     }
-
-    //---------------------------------------delete------------------------------------*
-    $servername = "localhost";
-    $identifiant = "root";
-    $password = "";
-    $dbname = "todolist"
-
-    $connection = mysql_connect($servername, $identifiant, $password, $dbname);
-
-    if (!$connection) {
-        die("Erreur de connection" .mysql_connect_error());
-        $sql = "DELETE FROM taches WHERE id=";
-        $connection->exec($sql);
-        echo "Suprimer avec succés";
-    }
-    catch(PDOExeption $e) {
-        echo $sql . "<br>". $e->getmessage();
-    }
-
-    $connection = null;
 
 }
