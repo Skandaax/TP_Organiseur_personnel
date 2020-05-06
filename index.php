@@ -12,7 +12,7 @@ $json = fopen("data/user.json", "w");
 fclose($json);
 
 $file = fopen("html/home.php", "c");
-$file = fopen("html/taches.php", "c");
+$file = fopen("models/taches.php", "c");
 $file = fopen("html/membre.php", "c");
 $file = fopen("html/login.php", "c+");
 

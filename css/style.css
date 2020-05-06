@@ -79,5 +79,7 @@ button {
     height: 330px;
     position: relative;
     border: 2 solid black;
-
+}
+#login_center {
+    margin-top: 50px;
 }
