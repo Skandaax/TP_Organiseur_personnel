@@ -7,10 +7,11 @@
 </head>
 
 <body>
-
+<div class="center_div troisd">
 <h1>Membre</h1>
 
 <a href="../index.php?route=deconnect">Me déconnecter</a>
+</div>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ $file = fopen("html/login.php", "c+");
 //--------------------------------------------------------------------------------
 //Inclusions class//
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
-require_once "models/utilisateur.php";
+require_once "models/Utilisateur.php";
 
 require "conf/global.php";
 
@@ -32,11 +32,9 @@ $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 switch($route) {
     case "home" : $include = showHome();
         break;
-    case "membre" : $include = showMembre();
-        break;
     case "insert_user" : insertUser();
         break;
-    case "connect_user" : connectUser();
+    case "connect_user" : showMembre();
         break;
     case "deconnect" : deconnectUser();
         break;
@@ -62,8 +60,8 @@ function showHome() : string {
 }
 
 function showMembre() {
-    $user = new utilisateur();
-    $user->selectall();
+    $user = new Utilisateur();
+    $user->selectAll();
     return "membre.php";
 }
 
@@ -112,10 +110,11 @@ function insertUser() {
      header('Location:index.php');
 }
 
-function deconnectUser() {
-    unset($_SESSION["pseudo"]);
-    header('Location:index.php');
-}
+
+    function deconnectUser() {
+        unset($_SESSION["pseudo"]);
+        header('Location:index.php');
+     }
 
 
 //--------------------------------------------------------------------------------

@@ -1,16 +1,20 @@
 <?php
 
-require "dbconnect.php";
+require "models/DbConnect.php";
 
 //---------------------------------------Cookie-----------------------------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---------------------------------------Utilisateur------------------------------------
-abstract class Utilisateur {
-    protected $idutilisateur;
-    protected $pseudo;
-    protected $email;
-    protected $password;
+class Utilisateur extends DbConnect{
+    private $idutilisateur;
+    private $pseudo;
+    private $email;
+    private $password;
+
+    function __construct($id) {
+        parent::__construct($id);
+    }
 
     function setIdUtilisateur(int $id) {
         $this->idutilisateur = $id;
@@ -88,20 +92,18 @@ abstract class Utilisateur {
             }
         }
     }
-}
 
-//---------------------------------------Extension de la base de donnée dbconnect-----------------------------------
-abstract class user extends dbconnect {
-    function __construct($id = null) {
-        parrent::__construct($id);
-    }
 
-    //---------------------------------------Select all------------------------------------
+//--------------------Extension de la base de donnée dbconnect------------------
+
+
+
+    //-----------------------------Select all------------------------------------
     function selectAll(){
         $query = "SELECT * FROM utilisateur;";
         $result = $this->pdo->prepare($query);
         $result->execute();
-        $datas = $result->fetchall();
+        $datas = $result->fetchAll();
 
         //$tab = [];
 
@@ -112,7 +114,6 @@ abstract class user extends dbconnect {
         //}
         //return $tab
     }
-
     //---------------------------------------Select------------------------------------
     function select() {
         $querry ="SELECT * FROM utilisateur WHERE id_utilisateur = $this->id;";
@@ -138,29 +139,30 @@ abstract class user extends dbconnect {
 
 
     //---------------------------------------delete------------------------------------
-    function delete() {
-        $servername = "localhost";
-        $identifiant = "root";
-        $password = "";
-        $dbname = "todolist";
+    // function delete() {
+    //     $servername = "localhost";
+    //     $identifiant = "root";
+    //     $password = "";
+    //     $dbname = "todolist";
 
-        //Création d'une connection-----------------------------------------------------
-        $connection = mysqli($servername, $identifiant, $password, $dbname);
+    //     //Création d'une connection-----------------------------------------------------
+    //     $connection = mysqli($servername, $identifiant, $password, $dbname);
 
-        //Vérification de la connection-------------------------------------------------
-        if (!$connection) {
-            die("Erreur de connection" .mysql_connect_error());
+    //     //Vérification de la connection-------------------------------------------------
+    //      if (!$connection) {
+    //          die("Erreur de connection" .mysql_connect_error());
 
-        //Suppression d'un enregistrent-------------------------------------------------
-        $sql = "DELETE FROM utilisateur WHERE id=1";
-        }
-        if ($connection->query($sql) === TRUE) {
-            echo "Enregistrement supprimer avec succés";
-        } else {
-            echo "Erreur lors de la suppression de l'enregistrement: " . $connection->error;
-        }
+    //      //Suppression d'un enregistrent-------------------------------------------------
+    //      $sql = "DELETE FROM utilisateur WHERE id=1"; }
+    //      if ($connection->query($sql) === TRUE) {
+    //          echo "Enregistrement supprimer avec succés";
+    //      } else {
+    //          echo "Erreur lors de la suppression de l'enregistrement: " . $connection->error;
+    //      }
         
-        $connection->close();
-    }
+    //      $connection->close();
+    //     }
 
 }
+
+    

@@ -1,15 +1,15 @@
 <?php
 
-require "models/crud.php";
+require "models/Crud.php";
 
 //--------------------------------------Base de donnée de connection-----------------------------------
-abstract class DbConnect implements crud {
+abstract class DbConnect implements Crud {
 
     protected $pdo;
     protected $id;
 
-    function __construct($id) {
-        $this->pdo = new pdo(DATABASE, LOGIN, PASSWORD);
+    function __construct($id = null) {
+        $this->pdo = new PDO(DATABASE, LOGIN, PASSWORD);
         $this->id = $id;
     }
 
