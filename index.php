@@ -8,21 +8,25 @@ setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 //--------------------------------------------------------------------------------
 // Création de fichiers
 
-$json = fopen("data/user.json", "w");
-fclose($json);
+// $json = fopen("data/user.json", "w");
+// fclose($json);
 
-$file = fopen("html/home.php", "c");
-$file = fopen("models/taches.php", "c");
-$file = fopen("html/membre.php", "c");
-$file = fopen("html/login.php", "c+");
-
+// $file = fopen("html/home.php", "c");
+// $file = fopen("models/taches.php", "c");
+// $file = fopen("html/membre.php", "c");
+// $file = fopen("html/login.php", "c+");
 
 //--------------------------------------------------------------------------------
 //Inclusions class//
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
-require_once "models/Utilisateur.php";
 
 require "conf/global.php";
+
+spl_autoload_register(function ($class) {
+    if(file_exists("models/$class.php")) {
+        require_once "models/$class.php";
+    }
+});
 
 //--------------------------------------------------------------------------------
 // 2.Rooter

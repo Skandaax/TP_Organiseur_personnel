@@ -1,7 +1,5 @@
 <?php
 
-require "models/DbConnect.php";
-
 //---------------------------------------Cookie-----------------------------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
@@ -12,7 +10,7 @@ class Utilisateur extends DbConnect{
     private $email;
     private $password;
 
-    function __construct($id) {
+    function __construct($id = null) {
         parent::__construct($id);
     }
 
@@ -93,10 +91,7 @@ class Utilisateur extends DbConnect{
         }
     }
 
-
 //--------------------Extension de la base de donnée dbconnect------------------
-
-
 
     //-----------------------------Select all------------------------------------
     function selectAll(){
@@ -105,14 +100,14 @@ class Utilisateur extends DbConnect{
         $result->execute();
         $datas = $result->fetchAll();
 
-        //$tab = [];
+        // $tab = [];
 
-        //$current = new utilisateur();
-        //$current->setId($data['id_utilisateur'];
+        // $current = new utilisateur();
+        // $current->setId($data['id_utilisateur'];
             
-            //array_push($tab, $current));
-        //}
-        //return $tab
+        //     array_push($tab, $current));
+        // }
+        // return $tab
     }
     //---------------------------------------Select------------------------------------
     function select() {
@@ -136,10 +131,12 @@ class Utilisateur extends DbConnect{
     }
 
     //---------------------------------------Update------------------------------------
+    function update(){
 
+    }
 
     //---------------------------------------delete------------------------------------
-    // function delete() {
+    function delete() {
     //     $servername = "localhost";
     //     $identifiant = "root";
     //     $password = "";
@@ -161,7 +158,7 @@ class Utilisateur extends DbConnect{
     //      }
         
     //      $connection->close();
-    //     }
+    }
 
 }
 

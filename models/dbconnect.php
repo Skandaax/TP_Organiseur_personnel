@@ -1,7 +1,5 @@
 <?php
 
-require "models/Crud.php";
-
 //--------------------------------------Base de donnée de connection-----------------------------------
 abstract class DbConnect implements Crud {
 
@@ -13,8 +11,8 @@ abstract class DbConnect implements Crud {
         $this->id = $id;
     }
 
-    function getID(): ?int {
-       return $this->id->$id;
+    function setId($id): ?int {
+        $this->id = $id;
     }
 
     abstract function insert();
