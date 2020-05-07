@@ -10,6 +10,9 @@ class Utilisateur extends DbConnect{
     private $email;
     private $password;
 
+    //---Constructeur de la classe qui appelle cette méthode-----------------------------
+    //---à chaque création d'une nouvelle instance de l'objet----------------------------
+
     function __construct($id = null) {
         parent::__construct($id);
     }
@@ -47,7 +50,7 @@ class Utilisateur extends DbConnect{
     }
 
 
-    //---------------------------------Sauvegarde de l'utilisateur---------------------------------
+    //-----------------Sauvegarde de l'utilisateur sur un fichier json---------------------------------
     function save_User() {        
         $tab = json_decode(file_get_contents("data/user.json"));
 
@@ -101,7 +104,7 @@ class Utilisateur extends DbConnect{
         $tab = [];
 
         foreach ($datas as $data) {
-            $current = new Utilisateur();
+            $current = new utilisateur();
             $current->setId($data['id_utilisateur']);
             
             //Appel aux autres setters
@@ -137,27 +140,7 @@ class Utilisateur extends DbConnect{
 
     //------------------------------Supprimer une ligne de la table---------------
     function delete() {
-    //     $servername = "localhost";
-    //     $identifiant = "root";
-    //     $password = "";
-    //     $dbname = "todolist";
 
-    //     //Création d'une connection-----------------------------------------------------
-    //     $connection = mysqli($servername, $identifiant, $password, $dbname);
-
-    //     //Vérification de la connection-------------------------------------------------
-    //      if (!$connection) {
-    //          die("Erreur de connection" .mysql_connect_error());
-
-    //      //Suppression d'un enregistrent-------------------------------------------------
-    //      $sql = "DELETE FROM utilisateur WHERE id=1"; }
-    //      if ($connection->query($sql) === TRUE) {
-    //          echo "Enregistrement supprimer avec succés";
-    //      } else {
-    //          echo "Erreur lors de la suppression de l'enregistrement: " . $connection->error;
-    //      }
-        
-    //      $connection->close();
     }
 
 }
