@@ -1,9 +1,9 @@
 <?php
 
-//---------------------------------------Cookie-----------------------------------
+//-----Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP----------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
-//---------------------------------------Utilisateur------------------------------------
+//-----------------------------Défini les actions de l'utilisateur----------------------
 class Utilisateur extends DbConnect{
     private $idutilisateur;
     private $pseudo;
@@ -47,10 +47,8 @@ class Utilisateur extends DbConnect{
     }
 
 
- //---------------------------------Sauvegarde de l'utilisateur------------------------------------
-    function save_User() 
-    {        
-    
+    //---------------------------------Sauvegarde de l'utilisateur---------------------------------
+    function save_User() {        
         $tab = json_decode(file_get_contents("data/user.json"));
 
         $unique = true;
@@ -100,14 +98,16 @@ class Utilisateur extends DbConnect{
         $result->execute();
         $datas = $result->fetchAll();
 
-        // $tab = [];
+        $tab = [];
 
-        // $current = new utilisateur();
-        // $current->setId($data['id_utilisateur'];
+        foreach ($datas as $data) {
+            $current = new Utilisateur();
+            $current->setId($data['id_Utilisateur'];
             
-        //   rray_push($tab, $current));
-        // }
-        // return $tab
+            //Appel aux autres setters
+            array_push($tab, $current);
+        }
+        return $tab;
     }
     //-------------sélection d'une ligne dans la table (selon son ID)------------
     function select() {

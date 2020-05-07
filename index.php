@@ -5,7 +5,7 @@ var_dump($_SESSION);
 //---------------------------------------Cookie-----------------------------------
 setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
-//-------------------------------------Chargement automatique des class-----------------------------------
+//-------------------------------------Chargement automatique des class-----------
 spl_autoload_register(function ($class) {
     if(file_exists("models/$class.php")) {
         require_once "models/$class.php";
