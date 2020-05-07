@@ -5,6 +5,13 @@ var_dump($_SESSION);
 //---------------------------------------Cookie-----------------------------------
 setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
+//-------------------------------------Chargement automatique des class-----------------------------------
+spl_autoload_register(function ($class) {
+    if(file_exists("models/$class.php")) {
+        require_once "models/$class.php";
+    }
+});
+
 //--------------------------------------------------------------------------------
 // Création de fichiers
 
@@ -19,14 +26,7 @@ setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 //--------------------------------------------------------------------------------
 //Inclusions class//
 // 1.Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
-
 require "conf/global.php";
-
-spl_autoload_register(function ($class) {
-    if(file_exists("models/$class.php")) {
-        require_once "models/$class.php";
-    }
-});
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
@@ -114,12 +114,11 @@ function insertUser() {
      header('Location:index.php');
 }
 
-
+//------------------------------Déconnection de l'utilisateur---------------------------------
     function deconnectUser() {
         unset($_SESSION["pseudo"]);
         header('Location:index.php');
      }
-
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE

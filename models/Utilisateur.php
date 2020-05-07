@@ -93,7 +93,7 @@ class Utilisateur extends DbConnect{
 
 //--------------------Extension de la base de donnée dbconnect------------------
 
-    //-----------------------------Select all------------------------------------
+    //----------------sélection de toutes les données d'une table---------------
     function selectAll(){
         $query = "SELECT * FROM utilisateur;";
         $result = $this->pdo->prepare($query);
@@ -105,11 +105,11 @@ class Utilisateur extends DbConnect{
         // $current = new utilisateur();
         // $current->setId($data['id_utilisateur'];
             
-        //     array_push($tab, $current));
+        //   rray_push($tab, $current));
         // }
         // return $tab
     }
-    //---------------------------------------Select------------------------------------
+    //-------------sélection d'une ligne dans la table (selon son ID)------------
     function select() {
         $querry ="SELECT * FROM utilisateur WHERE id_utilisateur = $this->id;";
         $result = $this->pdo->prepare($query);
@@ -119,7 +119,7 @@ class Utilisateur extends DbConnect{
         return $this;
     }
 
-    //---------------------------------------Insert------------------------------------
+    //-Permet d'insérer une nouvelle ligne de données dans une table-------------
     function insert() {
         $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) VALUES ('$this->id_utilisateur','$this->identifiant','$this->email','$this->password')";
 
@@ -130,12 +130,12 @@ class Utilisateur extends DbConnect{
         return $this;
     }
 
-    //---------------------------------------Update------------------------------------
+    //------------------------------Mettre à jour un élément de la table---------
     function update(){
 
     }
 
-    //---------------------------------------delete------------------------------------
+    //------------------------------Supprimer une ligne de la table---------------
     function delete() {
     //     $servername = "localhost";
     //     $identifiant = "root";
