@@ -2,7 +2,7 @@
 session_start();
 var_dump($_SESSION);
 
-//---------------------------------------Cookie-----------------------------------
+//-----Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP----------
 setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
 //-------------------------------------Chargement automatique des class-----------

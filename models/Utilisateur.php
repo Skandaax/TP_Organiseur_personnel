@@ -102,7 +102,7 @@ class Utilisateur extends DbConnect{
 
         foreach ($datas as $data) {
             $current = new Utilisateur();
-            $current->setId($data['id_utilisateur'];
+            $current->setId($data['id_utilisateur']);
             
             //Appel aux autres setters
             array_push($tab, $current);

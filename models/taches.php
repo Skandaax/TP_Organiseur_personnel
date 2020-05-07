@@ -17,13 +17,13 @@ abstract class taches() {
 
 }
 
-//---------------------------------------l'extension du Gestionnaire  des tâches----------------
+//-----------------------l'extension du Gestionnaire  des tâches----------------
 class taches extends dbconnect {
     function __construct($id) {
         parrent::__construct($id);
     }
 
-    //---------------------------------------Select all------------------------------------------
+    //----------------sélection de toutes les données d'une table---------------
     function selectAll(){
         $query = "SELECT * FROM taches;";
         $result = $this->pdo->prepare($query);
@@ -40,7 +40,7 @@ class taches extends dbconnect {
         //return $tab
     }
 
-    //---------------------------------------Select------------------------------------
+    //-------------sélection d'une ligne dans la table (selon son ID)------------
     function select() {
         $querry ="SELECT * FROM taches WHERE id_taches = $this->id;";
         $result = $this->pdo->prepare($query);
@@ -50,7 +50,7 @@ class taches extends dbconnect {
         return $this;
     }
 
-    //---------------------------------------Insert------------------------------------
+    //-Permet d'insérer une nouvelle ligne de données dans une table-------------
     function insert() {
         $query = "INSERT INTO taches(id_tache,description,deadline,id_utilisateur) VALUES ('$this->id_tache','$this->description','$this->deadline','$this->id_utlisateur')";
 
@@ -61,14 +61,14 @@ class taches extends dbconnect {
         return $this;
     }
 
-    //---------------------------------------Update------------------------------------
+    //------------------------------Mettre à jour un élément de la table---------
     //$servername = "localhost";
     //$identifiant = "root";
     //$password = "";
     //$dbname = "todolist"
     //}
 
-    //---------------------------------------delete------------------------------------
+    //------------------------------Supprimer une ligne de la table---------------
     function delete() {
         $servername = "localhost";
         $identifiant = "root";
