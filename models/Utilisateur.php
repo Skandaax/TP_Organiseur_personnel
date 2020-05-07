@@ -1,9 +1,9 @@
 <?php
 
-//-----Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP----------------
+//-----Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP-----------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
-//-----------------------------Défini les actions de l'utilisateur----------------------
+//---Défini les actions de l'utilisateur-------------------------------------------------
 class Utilisateur extends DbConnect{
     private $idutilisateur;
     private $pseudo;
@@ -17,6 +17,8 @@ class Utilisateur extends DbConnect{
         parent::__construct($id);
     }
 
+    //---Get - Récupère la valeur d'une proprièté-----------------------------------------
+    //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
     function setIdUtilisateur(int $id) {
         $this->idutilisateur = $id;
     }
@@ -49,8 +51,7 @@ class Utilisateur extends DbConnect{
         return $this->password;
     }
 
-
-    //-----------------Sauvegarde de l'utilisateur sur un fichier json---------------------------------
+    //---Sauvegarde de l'utilisateur sur un fichier json--------------------------
     function save_User() {        
         $tab = json_decode(file_get_contents("data/user.json"));
 
@@ -79,7 +80,7 @@ class Utilisateur extends DbConnect{
         }
     }
 
-    // Veriffier l'existence de l'utilisateur dans le fichier json----------------------------------
+    //---Veriffier l'existence de l'utilisateur dans le fichier json-------------
     function verifyUser() {
         $tab = json_decode(file_get_contents("data/user.json"));
 
@@ -92,9 +93,9 @@ class Utilisateur extends DbConnect{
         }
     }
 
-//--------------------Extension de la base de donnée dbconnect------------------
+//---Extension de la base de donnée dbconnect-----------------------------------
 
-    //----------------sélection de toutes les données d'une table---------------
+    //---sélection de toutes les données d'une table----------------------------
     function selectAll(){
         $query = "SELECT * FROM utilisateur;";
         $result = $this->pdo->prepare($query);
@@ -112,7 +113,7 @@ class Utilisateur extends DbConnect{
         }
         return $tab;
     }
-    //-------------sélection d'une ligne dans la table (selon son ID)------------
+    //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {
         $querry ="SELECT * FROM utilisateur WHERE id_utilisateur = $this->id;";
         $result = $this->pdo->prepare($query);
@@ -122,7 +123,7 @@ class Utilisateur extends DbConnect{
         return $this;
     }
 
-    //-Permet d'insérer une nouvelle ligne de données dans une table-------------
+    //---Permet d'insérer une nouvelle ligne de données dans une table-----------
     function insert() {
         $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) VALUES ('$this->id_utilisateur','$this->identifiant','$this->email','$this->password')";
 
@@ -133,12 +134,12 @@ class Utilisateur extends DbConnect{
         return $this;
     }
 
-    //------------------------------Mettre à jour un élément de la table---------
+    //---Mettre à jour un élément de la table------------------------------------
     function update(){
 
     }
 
-    //------------------------------Supprimer une ligne de la table---------------
+    //---Supprimer une ligne de la table-----------------------------------------
     function delete() {
 
     }

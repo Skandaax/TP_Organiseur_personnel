@@ -1,11 +1,15 @@
 <?php
+
+//---crée une session ou restaure celle trouvée sur le serveur,------------------- 
+//---via l'identifiant de session passé dans une requête GET, 
+//---POST ou par un cookie--------------------------------------------------------
 session_start();
 var_dump($_SESSION);
 
-//-----Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP----------
+//---Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP------------
 setcookie('id', 'mdp', time() + 182 * 24 * 60 * 60, '/');
 
-//-------------------------------------Chargement automatique des class-----------
+//---Chargement automatique des class---------------------------------------------
 spl_autoload_register(function ($class) {
     if(file_exists("models/$class.php")) {
         require_once "models/$class.php";
@@ -30,7 +34,7 @@ require "conf/global.php";
 
 //--------------------------------------------------------------------------------
 // 2.Rooter
-// Structure permetant d'appeler une action en fonction de la requête utilisteur
+//---Structure permetant d'appeler une action en fonction de la requête utilisteur
 $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
 switch($route) {
@@ -80,7 +84,7 @@ function insert_taches() {
 //Fonctionnalité redirigées :
 function insertUser() {
 
-    // Traitement d'un nouvelle utilisateur
+    //---Traitement d'un nouvelle utilisateur---
 
     if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
     {
@@ -96,7 +100,7 @@ function insertUser() {
     header('Location:index.php');
 }
 
-    // Connection d'un utilisateur
+    //---Connection d'un utilisateur---
     function connectUser() {
     
     if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
@@ -114,7 +118,7 @@ function insertUser() {
      header('Location:index.php');
 }
 
-//------------------------------Déconnection de l'utilisateur---------------------------------
+//---Déconnection de l'utilisateur-----------------------------------------------
     function deconnectUser() {
         unset($_SESSION["pseudo"]);
         header('Location:index.php');
@@ -135,7 +139,7 @@ function insertUser() {
 </head>
 <body>
 
-        <!-- Inclusion sous templates -->
+        <!---Inclusion sous templates--->
 
     <?php require "html/$include" ?>
 
