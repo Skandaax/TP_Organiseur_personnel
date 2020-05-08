@@ -130,7 +130,7 @@ class Utilisateur extends DbConnect{
         $result = $this->pdo->prepare($query);
         $result->execute();
 
-        $this->id = $this->pdo->lastInsertID();
+        $this->id = $this->pdo->lastInsertId();
         return $this;
     }
 
