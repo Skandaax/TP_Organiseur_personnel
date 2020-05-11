@@ -10,6 +10,7 @@ class Utilisateur extends DbConnect{
     private $nom;
     private $email;
     private $password;
+    private $password2;
 
     //---Constructeur de la classe qui appelle cette méthode-----------------------------
     //---à chaque création d'une nouvelle instance de l'objet----------------------------
@@ -52,6 +53,14 @@ class Utilisateur extends DbConnect{
         return $this->password;
     }
 
+    function setPassword(string $password2) {
+        $this->password2 = $password2;
+    }
+    
+    function getPassword() : string {
+        return $this->password2;
+    }
+
     //---Sauvegarde de l'utilisateur sur un fichier json--------------------------
     function save_User() {        
         $tab = json_decode(file_get_contents("data/user.json"));
@@ -67,7 +76,7 @@ class Utilisateur extends DbConnect{
             "id_utilisateur" => sizeof($tab) + 1,
             "identifiant" => $this->identifiant,
             "password" => $this->password,
-            "password2" => $this->password,
+            "password2" => $this->password2,
             "email" => $this->email
         ];
 
@@ -108,6 +117,7 @@ class Utilisateur extends DbConnect{
         foreach ($datas as $data) {
             $user = new utilisateur();
             $user->setIdUtilisateur($data['id_utilisateur']);
+            $user->setIdentifiant($data['identifiant']);
             $user->setEmail($data['email']);
             $user->setPassword($data['Password']);
 
