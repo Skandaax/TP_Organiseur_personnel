@@ -86,10 +86,10 @@ function insertUser() {
 
     //---Traitement d'un nouvelle utilisateur---
 
-    if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+    if(!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
     {
         $user = new Utilisateur();
-        $user->setPseudo($_POST["pseudo"]);
+        $user->setNom($_POST["nom"]);
         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
         $user->setEmail($_POST["email"]);
@@ -103,14 +103,14 @@ function insertUser() {
     //---Connection d'un utilisateur---
     function connectUser() {
     
-    if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
+    if(!empty($_POST["nom"]) && !empty($_POST["password"])) {
         $user = new Utilisateur();
-        $user->setUtilisateur($_POST["idutilisateur"]);
+        $user->setUtilisateur($_POST["id_utilisateur"]);
         $new = $user->verifyUser()?? false;
         
         if($new) {
             if(password_verify($_POST["password"], $new->password)) {
-                $_SESSION["pseudo"] = $new;
+                $_SESSION["nom"] = $new;
             }
         }
     }
@@ -120,7 +120,7 @@ function insertUser() {
 
 //---Déconnection de l'utilisateur-----------------------------------------------
     function deconnectUser() {
-        unset($_SESSION["pseudo"]);
+        unset($_SESSION["nom"]);
         header('Location:index.php');
      }
 

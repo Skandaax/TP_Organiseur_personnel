@@ -7,6 +7,7 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 class Utilisateur extends DbConnect{
     private $idutilisateur;
     private $pseudo;
+    private $nom;
     private $email;
     private $password;
 
@@ -105,11 +106,15 @@ class Utilisateur extends DbConnect{
         $tab = [];
 
         foreach ($datas as $data) {
-            $current = new utilisateur();
-            $current->setId($data['id_utilisateur']);
+            $user = new utilisateur();
+            $user->setIdUtilisateur($data['id_utilisateur']);
+            $user->setIdentifiant($data['identifiant']);
+            $user->setEmail($data['email']);
+            $user->setPassword($data['Password']);
+
             
             //Appel aux autres setters
-            array_push($tab, $current);
+            array_push($tab, $user);
         }
         return $tab;
     }
