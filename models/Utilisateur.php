@@ -6,7 +6,7 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 //---Défini les actions de l'utilisateur-------------------------------------------------
 class Utilisateur extends DbConnect{
     private $idutilisateur;
-    private $pseudo;
+    private $identifiant;
     private $nom;
     private $email;
     private $password;
@@ -28,12 +28,12 @@ class Utilisateur extends DbConnect{
         return $this->idutilisateur;
     }
     
-    function setPseudo(string $Pseudo){
-        $this->setPseudo = $pseudo;
+    function setIdentifiant(string $identifiant){
+        $this->setidentifiant = $identifiant;
     }
     
-    function getpseudo() : string {
-        return $this->setPseudo;
+    function getIdentifiant() : string {
+        return $this->setIdentifiant;
     }
 
     function setEmail(string $email) {
@@ -58,14 +58,14 @@ class Utilisateur extends DbConnect{
 
         $unique = true;
         foreach($tab as $element) {
-            if($element->pseudo == $this->pseudo){
+            if($element->identifiant == $this->identifiant){
                 $unique = false;
             }
         }
 
         $user = [
             "id_utilisateur" => sizeof($tab) + 1,
-            "pseudo" => $this->pseudo,
+            "identifiant" => $this->identifiant,
             "password" => $this->password,
             "password2" => $this->password,
             "email" => $this->email
@@ -108,11 +108,9 @@ class Utilisateur extends DbConnect{
         foreach ($datas as $data) {
             $user = new utilisateur();
             $user->setIdUtilisateur($data['id_utilisateur']);
-            $user->setIdentifiant($data['identifiant']);
             $user->setEmail($data['email']);
             $user->setPassword($data['Password']);
 
-            
             //Appel aux autres setters
             array_push($tab, $user);
         }
@@ -130,9 +128,13 @@ class Utilisateur extends DbConnect{
 
     //---Permet d'insérer une nouvelle ligne de données dans une table-----------
     function insert() {
-        $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) VALUES ('$this->id_utilisateur','$this->identifiant','$this->email','$this->password')";
+        $query = "INSERT INTO utilisateur(id_utilisateur,identifiant,email,Password) 
+                    VALUES (:identifiant, :email, :Password)";
 
         $result = $this->pdo->prepare($query);
+        $result->bindValue(':identifiant', $this->identifiant, PDO::PARAM_STR);
+        $result->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $result->bindValue(':Password', $this->password, PDO::PARAM_STR);
         $result->execute();
 
         $this->id = $this->pdo->lastInsertId();

@@ -61,7 +61,7 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    if(isset($_SESSION["pseudo"])){
+    if(isset($_SESSION["identifiant"])){
         header("location:index.php?route=membre");
     }
     return "home.php";
@@ -86,10 +86,10 @@ function insertUser() {
 
     //---Traitement d'un nouvelle utilisateur---
 
-    if(!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+    if(!empty($_POST["identifiant"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
     {
         $user = new Utilisateur();
-        $user->setNom($_POST["nom"]);
+        $user->setIdentifiant($_POST["identifiant"]);
         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
         $user->setEmail($_POST["email"]);
@@ -103,14 +103,14 @@ function insertUser() {
     //---Connection d'un utilisateur---
     function connectUser() {
     
-    if(!empty($_POST["nom"]) && !empty($_POST["password"])) {
+    if(!empty($_POST["identifiant"]) && !empty($_POST["password"])) {
         $user = new Utilisateur();
         $user->setUtilisateur($_POST["id_utilisateur"]);
         $new = $user->verifyUser()?? false;
         
         if($new) {
             if(password_verify($_POST["password"], $new->password)) {
-                $_SESSION["nom"] = $new;
+                $_SESSION["identifiant"] = $new;
             }
         }
     }
@@ -120,7 +120,7 @@ function insertUser() {
 
 //---Déconnection de l'utilisateur-----------------------------------------------
     function deconnectUser() {
-        unset($_SESSION["nom"]);
+        unset($_SESSION["identifiant"]);
         header('Location:index.php');
      }
 

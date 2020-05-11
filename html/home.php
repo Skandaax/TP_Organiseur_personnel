@@ -19,7 +19,7 @@
 &nbsp;
     <form action="index.php?route=insert_user" method="POST">
         <div id="espace_1">
-            <input type="text" id="utilisateur" name="utilisateur" placeholder="Votre identifiant"  required>
+            <input type="text" id="identifiant" name="identifiant" placeholder="Votre identifiant"  required>
         </div>
         <div id="espace_2">
             <input type="text" id="email" name="email" placeholder="Votre email" required>
