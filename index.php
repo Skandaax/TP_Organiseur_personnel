@@ -4,6 +4,7 @@
 //---via l'identifiant de session passé dans une requête GET, 
 //---POST ou par un cookie--------------------------------------------------------
 session_start();
+$_SESSION['login'] = 'Identifiant';
 var_dump($_SESSION);
 
 //---Définit un cookie qui sera envoyé avec le reste des en-têtes HTTP------------
@@ -86,31 +87,31 @@ function insertUser() {
 
     //---Traitement d'un nouvelle utilisateur---
 
-    if(!empty($_POST["identifiant"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
-    {
-        $user = new Utilisateur();
-        $user->setIdentifiant($_POST["identifiant"]);
-        $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
-        $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
-        $user->setEmail($_POST["email"]);
+     if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+     {
+         $user = new Utilisateur();
+         $user->setPassword($_POST["pseudo"]);
+         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
+         $user->setEmail($_POST["email"]);
 
-        $user->save_User();
-    }
+        // $user->save_User();
+     }
 
-    header('Location:index.php');
-}
+     header('Location:index.php');
+ }
 
     //---Connection d'un utilisateur---
     function connectUser() {
     
-    if(!empty($_POST["identifiant"]) && !empty($_POST["password"])) {
+    if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
         $user = new Utilisateur();
         $user->setUtilisateur($_POST["id_utilisateur"]);
         $new = $user->verifyUser()?? false;
         
         if($new) {
             if(password_verify($_POST["password"], $new->password)) {
-                $_SESSION["identifiant"] = $new;
+                $_SESSION["pseudo"] = $new;
             }
         }
     }
@@ -120,7 +121,7 @@ function insertUser() {
 
 //---Déconnection de l'utilisateur-----------------------------------------------
     function deconnectUser() {
-        unset($_SESSION["identifiant"]);
+        unset($_SESSION["utilisateur"]);
         header('Location:index.php');
      }
 

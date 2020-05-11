@@ -6,7 +6,7 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 //---Défini les actions de l'utilisateur-------------------------------------------------
 class Utilisateur extends DbConnect{
     private $idutilisateur;
-    private $identifiant;
+    private $pseudo;
     private $nom;
     private $email;
     private $password;
@@ -29,12 +29,12 @@ class Utilisateur extends DbConnect{
         return $this->idutilisateur;
     }
     
-    function setIdentifiant(string $identifiant){
-        $this->setidentifiant = $identifiant;
+    function setPseudo(string $pseudo){
+        $this->setpseudo = $pseudo;
     }
     
-    function getIdentifiant() : string {
-        return $this->setIdentifiant;
+    function getPseudo() : string {
+        return $this->setpseudo;
     }
 
     function setEmail(string $email) {
@@ -53,55 +53,55 @@ class Utilisateur extends DbConnect{
         return $this->password;
     }
 
-    function setPassword(string $password2) {
+    function setPassword2(string $password2) {
         $this->password2 = $password2;
     }
     
-    function getPassword() : string {
+    function getPassword2() : string {
         return $this->password2;
     }
 
     //---Sauvegarde de l'utilisateur sur un fichier json--------------------------
-    function save_User() {        
-        $tab = json_decode(file_get_contents("data/user.json"));
+    // function save_User() {        
+    //     $tab = json_decode(file_get_contents("data/user.json"));
 
-        $unique = true;
-        foreach($tab as $element) {
-            if($element->identifiant == $this->identifiant){
-                $unique = false;
-            }
-        }
+    //     $unique = true;
+    //     foreach($tab as $element) {
+    //         if($element->pseudo == $this->pseudo){
+    //             $unique = false;
+    //         }
+    //     }
 
-        $user = [
-            "id_utilisateur" => sizeof($tab) + 1,
-            "identifiant" => $this->identifiant,
-            "password" => $this->password,
-            "password2" => $this->password2,
-            "email" => $this->email
-        ];
+    //     $user = [
+    //         "id_utilisateur" => sizeof($tab) + 1,
+    //         "pseudo" => $this->pseudo,
+    //         "password" => $this->password,
+    //         "password2" => $this->password2,
+    //         "email" => $this->email
+    //     ];
 
-        echo json_encode($tab);
+    //     echo json_encode($tab);
 
-        if($unique) {
-            array_push($tab, $user);        
-            $user_json = json_encode($tab);
-            file_put_contents("data/user.json", $user_json);
-            var_dump($user_json);
-        }
-    }
+    //     if($unique) {
+    //         array_push($tab, $user);        
+    //         $user_json = json_encode($tab);
+    //         file_put_contents("data/user.json", $user_json);
+    //         var_dump($user_json);
+    //     }
+    // }
 
     //---Veriffier l'existence de l'utilisateur dans le fichier json-------------
-    function verifyUser() {
-        $tab = json_decode(file_get_contents("data/user.json"));
+    // function verifyUser() {
+    //     $tab = json_decode(file_get_contents("data/user.json"));
 
-        foreach($tab as $user) {
-            if($this->utilisateur == $user->utilisateur) {
-            return $user;
-            }else {
-                header('Location: index.php?route=connect');
-            }
-        }
-    }
+    //     foreach($tab as $user) {
+    //         if($this->utilisateur == $user->utilisateur) {
+    //         return $user;
+    //         }else {
+    //             header('Location: index.php?route=connect');
+    //         }
+    //     }
+    // }
 
 //---Extension de la base de donnée dbconnect-----------------------------------
 
@@ -117,7 +117,6 @@ class Utilisateur extends DbConnect{
         foreach ($datas as $data) {
             $user = new utilisateur();
             $user->setIdUtilisateur($data['id_utilisateur']);
-            $user->setIdentifiant($data['identifiant']);
             $user->setEmail($data['email']);
             $user->setPassword($data['Password']);
 
@@ -150,6 +149,9 @@ class Utilisateur extends DbConnect{
         $this->id = $this->pdo->lastInsertId();
         return $this;
     }
+
+    
+
 
     //---Mettre à jour un élément de la table------------------------------------
     function update(){
