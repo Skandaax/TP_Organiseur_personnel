@@ -7,6 +7,7 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 class Utilisateur extends DbConnect{
     private $idutilisateur;
     private $pseudo;
+    private $identifiant;
     private $nom;
     private $email;
     private $password;
