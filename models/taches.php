@@ -70,7 +70,9 @@ class taches extends dbconnect() {
 
 }
 
-//---Template HTML-----------------------------------
+//--------------------------------------------------------------------------------
+//---TEMPLATE
+//---Affichage du système de templates HTML
 ?>
 
 <!DOCTYPE html>
