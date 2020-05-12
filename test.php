@@ -27,17 +27,19 @@ if (preg_match('#(0|\+33)[1-9]( *[0-9]{2}){4}#', $numero)) {
 }
 
 
-$nom = "Martin, Bernard ,Thomas, Petit , Robert, Richard, Durand, Dubois, Moreau, Laurent,Simon,
-Michel, Lefebvre, Leroy, Roux, David, Bertrand, Morel, Fournier, Girard, Bonnet,
-Dupont, Lambert, Fontaine, Rousseau, Vincent, Artôt, Désirée [Desiree Artot]
-Boëllmann, Léon, Brégent, Michel-Georges, Compère, Loyset, Daniélou, 
-Alain, Delibes, Léo, Diémer, Louis, Dupré, Marcel, 
-Fauré, Gabriel, Françaix, Jean, Gaviniès, Pierre
-Gédalge, André, Gutchë, Gene ";
+$noms = ["Martin", "Bernard" ,"Thomas", "Petit" , "Robert", "Richard", "Durand", "Dubois", "Moreau", "Laurent,Simon",
+"Michel", "Lefebvre", "Leroy", "Roux", "David", "Bertrand", "Morel", "Fournier", "Girard", "Bonnet",
+"Dupont", "Lambert", "Fontaine", "Rousseau", "Vincent", "Artôt", "Désirée",
+"Boëllmann", "Léon", "Brégent", "Michel-Georges", "Compère", "Loyset", "Daniélou", 
+"Alain", "Delibes", "Léo", "Diémer", "Louis", "Dupré", "Marcel", 
+"Fauré", "Gabriel", "Françaix", "Jean", "Gaviniès", "Pierre",
+"Gédalge", "André", "Gutchë", "Gene"
+];
 
-foreach($nom as $nom) {
-    if (preg_match('#^[a-zA-Z],[àâäéèêëïîôöùûüçæœÆŒ],
-    [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ]$#', $nom)) {
+foreach($noms as $nom) {
+    if (preg_match(
+        '#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ
+        -ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $nom)) {
         //on peut ajouter le nom à la base de données
         echo "Le nom $nom est correct.<br>";
     }else {
@@ -46,4 +48,4 @@ foreach($nom as $nom) {
     }
 }
 
-    var_dump($nom);
+    var_dump($noms);
