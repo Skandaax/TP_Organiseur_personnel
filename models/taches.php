@@ -1,12 +1,12 @@
 <?php
 
-//---Défini les actions de l'utilisateur-------------------------------------------------
-class taches extends dbconnect() {
+//---Défini les actions des taches-------------------------------------------------
+class Taches  {
 
     private $idtaches;
-    private $description
-    private $deadline
-    private $idUtilisateur
+    private $description;
+    private $deadline;
+    private $idUtilisateur;
 
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
@@ -80,18 +80,31 @@ class taches extends dbconnect() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/calendar.css">
     <title>Ma TODO-LIST</title>
 </head>
 <body>
 
  <h1>a TOTO LIST</h1>
 
- <p>
- Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro 
- succinctis vesperi per tabernas palabatur et conpita quaeritando Graeco sermone, cuius erat inpendio gnarus, quid de Caesare quisque sentiret. et haec confidenter agebat in urbe ubi 
- pernoctantium luminum claritudo dierum solet imitari fulgorem. postremo agnitus saepe iamque,
-si prodisset, conspicuum se fore contemplans, non nisi luce palam egrediens ad agenda quae putabat seria cernebatur. et haec quidem medullitus multis gementibus agebantur.
- </p>
+    <?php
+        require "../models/date.php";
+        $date = new Date();
+        $year = date('Y');
+        $dates = $date->getAll($year);
+    ?>
+    <div class="period">
+        <div class="year"></div><?php echo $year; ?></div>
+        <div class="months">
+            <ul>
+                <?php foreach($date->months as $id=>$m): ?>
+                    <li><a href="#" id="linkMonth"><?php echo $id+1;?> <?php utf8_encode(substr(utf8_decode($m),0,3)); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php $dates = current($dates);?>
+    </div>
 
+    <pre><?PHP print_r($dates); ?></pre>
 </body>
 </html>

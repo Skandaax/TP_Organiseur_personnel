@@ -1,6 +1,6 @@
 <?php
 
-//-Interface Crud qui permet permettre l'intéraction avec une base de données-----
+//-Interface Crud qui permet  l'intéraction avec une base de données-----
 interface Crud {
 
     function insert();
