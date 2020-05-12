@@ -113,7 +113,7 @@ class Utilisateur extends DbConnect{
         $result->execute();
         $datas = $result->fetchAll();
 
-        $tab = [];
+        $datatab = [];
 
         foreach ($datas as $data) {
             $user = new utilisateur();
@@ -122,9 +122,9 @@ class Utilisateur extends DbConnect{
             $user->setPassword($data['Password']);
 
             //Appel aux autres setters
-            array_push($tab, $user);
+            array_push($datatab, $user);
         }
-        return $tab;
+        return $datatab;
     }
     //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {

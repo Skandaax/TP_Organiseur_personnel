@@ -1,100 +1,76 @@
 <?php
 
-//---------------------------------------Gestion des tâches------------------------------------
-abstract class taches() {
+//---Défini les actions de l'utilisateur-------------------------------------------------
+class taches extends dbconnect() {
 
-    private $pdo;
-    private $id_taches;
+    private $idtaches;
+    private $description
+    private $deadline
+    private $idUtilisateur
 
-    function __construct($id) {
-        $this->pdo = new pdo(<database>, <login>, <assword>);
-        $this->id = $id;
+    //---Get - Récupère la valeur d'une proprièté-----------------------------------------
+    //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
+    function getIdtaches(): int {
+        return $this->idtaches;
     }
 
-    function getIdtaches($id) {
-        $this->id_taches = $id;
+    function getDescription(): string {
+        return $this->description;
+    }
+
+    function deadline(): DataTime {
+        return $this->deadline;
+    }
+
+    function getIdUtilisateur(): int {
+        return $this->idUtilisateur;
+    }
+
+    function setIdtaches(int $id){
+        $this->idtaches = $id;
+    }
+
+    function setDescription(string $desc){
+        $this->description = $desc;
+    }
+
+    function setDeadline(DateTime $dd){
+        $this->idtaches = $dd;
+    }
+
+    function setIdUtilisateur(int $id){
+        $this->idUtilisateur = $id;
+    }
+
+//---Extension de la base de donnée dbconnect-----------------------------------
+
+    //---sélection de toutes les données d'une table----------------------------
+    function selectAll(){
+
+    }
+    //---sélection d'une ligne dans la table (selon son ID)----------------------
+    function select() {
+
+    }
+
+    //---Permet d'insérer une nouvelle ligne de données dans une table-----------
+    function insert() {
+
+    }
+
+    //---Mettre à jour un élément de la table------------------------------------
+    function update(){
+
+    }
+
+    //---Supprimer une ligne de la table-----------------------------------------
+    function delete() {
+
     }
 
 }
 
-//-----------------------l'extension du Gestionnaire  des tâches----------------
-class taches extends dbconnect {
-    function __construct($id) {
-        parrent::__construct($id);
-    }
-
-    //----------------sélection de toutes les données d'une table---------------
-    function selectAll(){
-        $query = "SELECT * FROM taches;";
-        $result = $this->pdo->prepare($query);
-        $result->execute();
-        $datas = $result->fetchall();
-
-        //$tab = [];
-
-        //$current = new taches();
-        //$current->setId($data['id_taches'];
-            
-            //array_push($tab, $current));
-        //}
-        //return $tab
-    }
-
-    //-------------sélection d'une ligne dans la table (selon son ID)------------
-    function select() {
-        $querry ="SELECT * FROM taches WHERE id_taches = $this->id;";
-        $result = $this->pdo->prepare($query);
-        $result->execute();
-        $data = $result->fetch();
-
-        return $this;
-    }
-
-    //-Permet d'insérer une nouvelle ligne de données dans une table-------------
-    function insert() {
-        $query = "INSERT INTO taches(id_tache,description,deadline,id_utilisateur) VALUES ('$this->id_tache','$this->description','$this->deadline','$this->id_utlisateur')";
-
-        $result = $this->pdo->prepare($query);
-        $result->execute();
-
-        $this->id = $this->pdo->lastInsertID();
-        return $this;
-    }
-
-    //------------------------------Mettre à jour un élément de la table---------
-    //$servername = "localhost";
-    //$identifiant = "root";
-    //$password = "";
-    //$dbname = "todolist"
-    //}
-
-    //------------------------------Supprimer une ligne de la table---------------
-    function delete() {
-        $servername = "localhost";
-        $identifiant = "root";
-        $password = "";
-        $dbname = "todolist";
-
-        //Création d'une connection-----------------------------------------------------
-        $connection = mysqli($servername, $identifiant, $password, $dbname);
-
-        //Vérification de la connection-------------------------------------------------
-        if (!$connection) {
-            die("Erreur de connection" .mysql_connect_error());
-
-        //Suppression d'un enregistrent-------------------------------------------------
-        $sql = "DELETE FROM utilisateur WHERE id=1";
-        }
-        if ($connection->query($sql) === TRUE) {
-            echo "Enregistrement supprimer avec succés";
-        } else {
-            echo "Erreur lors de la suppression de l'enregistrement: " . $connection->error;
-        }
-        
-        $connection->close();
-    }
-
-//--------------------------------------Template HTML-----------------------------------
+//---Template HTML-----------------------------------
 ?>
 
 <!DOCTYPE html>
