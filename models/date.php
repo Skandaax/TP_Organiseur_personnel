@@ -51,20 +51,7 @@ class Month {
 //---à chaque création d'une nouvelle instance de l'objet----------------------------
     Public function MonthName(int $num) {
         $fr_names = [1 => "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
-            $this->monthmai;
-            
-            $aujd = new DateTmeImmutable("now", new DateTimeZone("Europe/paris"));
-
-            $annee_courrante = $aujd->format("Y");
-            $annee_courrante = $aujd->format("m");
-            $annee_courrante = $aujd->format("d");
-            
-            echo "Nous sommes le $jour_courrant/$annee_courrante";
-            
-            require "../models/date.php";
-            
-            $month = new month($mois_courrant);
-            var_dump($month);
+            $this->MonthName;
 
     }
 

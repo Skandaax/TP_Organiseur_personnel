@@ -39,7 +39,7 @@ require "conf/global.php";
 $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
 switch($route) {
-    case "home" : $include = showHome();
+    case "home" : $view = showHome();
         break;
     case "insert_user" : insertUser();
         break;
@@ -47,11 +47,11 @@ switch($route) {
         break;
     case "deconnect" : deconnectUser();
         break;
-    case "login" : $include = showLogin();
+    case "login" : $view = showLogin();
         break;
         case "taches" : insert_taches();
         break;
-    default : $nclude = showHome();
+    default : $view = showHome();
 }
 
 //--------------------------------------------------------------------------------
@@ -82,36 +82,65 @@ function insert_taches() {
     return "taches.php";
 }
 
+function showCalendar() {
+    ​
+        $aujd = new DateTimeImmutable("now", new DateTimeZone("europe/Paris"));
+        $annee_courante = $aujd->format("Y");
+        $mois_courant = $aujd->format("m");
+        $month = new Month($mois_courant, $annee_courante);
+    ​
+        $datas = [
+            "mois" => $month->getMonthName(),
+            "annee" => $month->getYear()
+        ];
+        return ["template" => "calendrier.php", "datas" => $datas];
+    }
+
 //Fonctionnalité redirigées :
 function insertUser() {
 
     //---Traitement d'un nouvelle utilisateur---
 
-     if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+//      if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
+//      {
+
+//         if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
+
+//             $user = new Utilisateur();
+//             $user->setPassword($_POST["pseudo"]);
+//             $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+//             $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
+//             $user->setEmail($_POST["email"]);
+
+//             $user->Insert();
+
+//             $_SESSION['pseudo'] = $pseudo;
+//             $_SESSION['password'] = $password;
+
+//             echo "Le pseudo est correct";
+//         }else {
+//             //on ne peut pas ajouter le nom à la base de données
+//             echo "Le pseudo n'est pas correct";
+//         }
+//         // $user->save_User();
+
+//      header('Location:index.php');
+//  }
+
+if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
      {
+         $user = new Utilisateur();
+         $user->setPassword($_POST["pseudo"]);
+         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
+         $user->setEmail($_POST["email"]);
 
-        if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
-
-            $user = new Utilisateur();
-            $user->setPassword($_POST["pseudo"]);
-            $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
-            $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
-            $user->setEmail($_POST["email"]);
-
-            $user->Insert();
-
-            $_SESSION['pseudo'] = $pseudo;
-            $_SESSION['password'] = $password;
-
-            echo "Le pseudo est correct";
-        }else {
-            //on ne peut pas ajouter le nom à la base de données
-            echo "Le pseudo n'est pas correct";
-        }
         // $user->save_User();
+     }
 
      header('Location:index.php');
  }
+
 
     //---Connection d'un utilisateur---
     function connectUser() {
@@ -137,6 +166,7 @@ function insertUser() {
         header('Location:index.php');
      }
 
+
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML
@@ -154,7 +184,7 @@ function insertUser() {
 
         <!---Inclusion sous templates--->
 
-    <?php require "html/$include" ?>
+        <?php require "models/{$view['template']}"; ?>
 
 </body>
-</html>
+</html>v

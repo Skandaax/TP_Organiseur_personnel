@@ -1,3 +1,11 @@
+
+<?php
+
+$datas = $view["datas"];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
