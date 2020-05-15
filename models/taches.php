@@ -87,24 +87,6 @@ class Taches  {
 
  <h1>a TOTO LIST</h1>
 
-    <?php
-        require "../models/date.php";
-        $date = new Date();
-        $year = date('Y');
-        $dates = $date->getAll($year);
-    ?>
-    <div class="period">
-        <div class="year"></div><?php echo $year; ?></div>
-        <div class="months">
-            <ul>
-                <?php foreach($date->months as $id=>$m): ?>
-                    <li><a href="#" id="linkMonth"><?php echo $id+1;?> <?php utf8_encode(substr(utf8_decode($m),0,3)); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php $dates = current($dates);?>
-    </div>
 
-    <pre><?PHP print_r($dates); ?></pre>
 </body>
 </html>

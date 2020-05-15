@@ -89,14 +89,26 @@ function insertUser() {
 
      if(!empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
      {
-         $user = new Utilisateur();
-         $user->setPassword($_POST["pseudo"]);
-         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
-         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
-         $user->setEmail($_POST["email"]);
 
+        if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
+
+            $user = new Utilisateur();
+            $user->setPassword($_POST["pseudo"]);
+            $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+            $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
+            $user->setEmail($_POST["email"]);
+
+            $user->Insert();
+
+            $_SESSION['pseudo'] = $pseudo;
+            $_SESSION['password'] = $password;
+
+            echo "Le pseudo est correct";
+        }else {
+            //on ne peut pas ajouter le nom à la base de données
+            echo "Le pseudo n'est pas correct";
+        }
         // $user->save_User();
-     }
 
      header('Location:index.php');
  }
