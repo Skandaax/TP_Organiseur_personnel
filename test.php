@@ -78,6 +78,12 @@
 // ​
 // echo "Nous sommes le $jour_courant/$mois_courant/$annee_courante";
 
-echo date('F j, Y', strtotime('le 1er jour de la semaine'));;
+// echo date('F j, Y', strtotime('le 1er jour de la semaine'));;
 
-public 'date' =>
+// public 'date' =>
+
+
+
+$year = date("Y");
+$monthname = date("m");
+var_dump($year, $monthname);

@@ -26,22 +26,48 @@
 
 class Month {
 
-    Private $monthmai;
+    Private $monthname;
+    Private $year;
 
-    function setMonthMai(string $monthmai) {
-        $this->setMonthMai = $month;
+//---Get - Récupère la valeur d'une proprièté-----------------------------------------
+//---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
+    function setMonthName(string $monthname) {
+        $this->setMonthName = $Name;
+    }
+
+    function getMontName() : string {
+        return $this->monthName;
+    }
+
+    function setYear(string $year) {
+        $this->setYear = $year;
     }
 
     function getMonthMai() : string {
-        return $this->monthmai
+        return $this->Year;
+    }
+
+//---Constructeur de la classe qui appelle cette méthode-----------------------------
+//---à chaque création d'une nouvelle instance de l'objet----------------------------
+    Public function MonthName(int $num) {
+        $fr_names = [1 => "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
+            $this->monthmai;
+            
+            $aujd = new DateTmeImmutable("now", new DateTimeZone("Europe/paris"));
+
+            $annee_courrante = $aujd->format("Y");
+            $annee_courrante = $aujd->format("m");
+            $annee_courrante = $aujd->format("d");
+            
+            echo "Nous sommes le $jour_courrant/$annee_courrante";
+            
+            require "../models/date.php";
+            
+            $month = new month($mois_courrant);
+            var_dump($month);
+
     }
 
 
-    $mois_courrant = date("m");
-
-    var_dump($may);
-    
-
-    
 
 }

@@ -70,6 +70,7 @@ class Taches  {
 
 }
 
+
 //--------------------------------------------------------------------------------
 //---TEMPLATE
 //---Affichage du système de templates HTML
@@ -87,6 +88,16 @@ class Taches  {
 
  <h1>a TOTO LIST</h1>
 
+ <?php            
+ 
+ require "../models/date.php";
 
+ $year = date("Y");
+ $monthname = date("F");
+ echo "On est en $year et on est mois de $monthname";
+ var_dump($year, $monthname);
+
+
+ ?>
 </body>
 </html>
